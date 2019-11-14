@@ -111,7 +111,7 @@ E-Ticaret sitesi olarak yazılan bu proje de kullanıcı sitede istediği katego
                 d.	Category
                 e.	Product (Category sınıfı ile Product sınıfı çoka çok ilişkili)
                 f.	Feature (özellik sınıfı=> Product sınıfı ile çoka çok ilişkili (junction table’ı => ProductFeature tablosu. Value değerleri bu tablo içerisinde)
-                Order sınıfı (Product sınıfı ile çoka çok ilişkili.  Junction table’i OrderDetail)
+                e.Order sınıfı (Product sınıfı ile çoka çok ilişkili.  Junction table’i OrderDetail)
           c)	Gerekli özellikler sınıflara verildi.
           d)	Relational propertyler hazırlandı.
 
@@ -162,7 +162,7 @@ c)	Queries:
 # Zaman Yönetimi
 1)	Tarık => 4 gün  (Api entegrasyonu Kargo)------- 14 de basla
 2)	Ozan => (Api Entegrasyonu E Ticaret) -------- 14 de basla
-3)	Esra => 4 gün (veri tabanı) ------ 14 de basla
+3)	Esra => 4 gün (veri tabanı) ------ Yapıldı (14.11.2019)
 4)	Enes => 4 gün (Loglama ve ek veri tabanı) ----- 14 basla 
 5)  Kasım 18 Tarık (Api),Enes(Loglama) ve Esra veritabanı bitiyor... -- Yetişir...
 6)  Aralık 5 Tarık ve Enes Backend bitişi...
