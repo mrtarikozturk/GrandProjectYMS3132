@@ -155,7 +155,7 @@ c)	Queries:
 #	Proje üzerinde çalışılmadan önce yapılması gerekenler:
 
 1)	Projeyi Build etmeyi unutmayın. Genelde git hub’dan bağlanırken entityframeworklerde sorun çıkıyor. Build ederek bu sorun çözülüyor. 
-2)	Bogus bazen patlıyor. Böyle bir durumda birkaç daha deneyin. 
+2)	Bogus bazen patlıyor. Böyle bir durumda birkaç defa daha deneyin. 
 3)	MVCUI katmanında oluşturulan HomeContorller, Test amaçlı oluşturulmuştur. Keza view-Home klasöründeki “index” view’u da test amaçlı oluşturulmuştur. Çalışmalarınızı testlerini yaparken belki kullanmak istenir belki diye özellikle silmedim. Sizler istediğiniz modifikasyonları orada uygulayabilirsiniz.
 
 
