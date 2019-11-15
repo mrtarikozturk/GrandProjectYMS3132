@@ -158,13 +158,39 @@ c)	Queries:
 2)	Bogus bazen patlıyor. Böyle bir durumda birkaç defa daha deneyin. 
 3)	MVCUI katmanında oluşturulan HomeContorller, Test amaçlı oluşturulmuştur. Keza view-Home klasöründeki “index” view’u da test amaçlı oluşturulmuştur. Çalışmalarınızı testlerini yaparken belki kullanmak istenir belki diye özellikle silmedim. Sizler istediğiniz modifikasyonları orada uygulayabilirsiniz.
 
+# Tarık (Kargo Web Api)
+
+1)	NTier mimarisi oluşturuldu(MODEL, MAP, DAL, BLL, WebApi)
+
+2)	MODEL katmanında veritabanı sınıfları(Alici, AdresBilgisi, Hareket, Kargo) ve gerekli enum yapıları(DataStatus, Durum) oluşturuldu.
+
+3)	MODEL katmanında veritabanı sınıfları arasındaki ilişkiler oluşturuldu.
+
+4)	MAP katmanında tablo isimleri ayarlandı, maksimum karakter sayıları belirlendi.
+
+5)	DAL katmanında veritabanı sınıfı oluşturuldu ve configürasyon ayarları sağlandı, veritabanı tabloları oluşturuldu.
+
+6)	BLL katmanında Singleton Patterni ve Unit Of Work Patternleri uygulandı. Veritabanı işlemlerinde kullanılacak metotlara açıklamaları eklendi. 
+
+7)	WebApi katmanında connectionString yazıldı. 
+
+8)	WebApi katmanında VM sınıfları oluşturuldu. Post olarak gelecek olan KargoVM sınıfında validation(DataAnnotations) ayarlamaları yapıldı.
+
+9)	WebApi katmanında HomeController oluşturuldu. KargoOlustur ve KargoTakip isimli iki metot oluşturuldu.
+
+10)	WebApi katmanında route template "api/{controller}/{action}/{kargoTakip}" olarak ayarlandı. {kargoTakip} ifadesi Postman veya Fiddler araçlarında test edilebilirliği sağlamak için yazıldı. Bu veri form ile geleceği için daha sonra kaldırılacak.
+
+11)	Proje Fiddler aracı ile test edildi. Çalıştığı görüldü.
+
+12) KargoOlustur Metot Çıktısı ve KargoTakipEt Metot Çıktısı görselleri Dokumantasyonda mevcuttur...
+
 
 # Zaman Yönetimi
-1)	Tarık => 4 gün  (Api entegrasyonu Kargo)------- 14 de basla
-2)	Ozan => (Api Entegrasyonu E Ticaret) -------- 14 de basla
-3)	Esra => 4 gün (veri tabanı) ------ Yapıldı (14.11.2019)
-4)	Enes => 4 gün (Loglama ve ek veri tabanı) ----- 14 basla 
-5)  Kasım 18 Tarık (Api),Enes(Loglama) ve Esra veritabanı bitiyor... -- Yetişir...
+1)	Esra => 4 gün (veri tabanı) ------ Yapıldı (14.11.2019)
+2)	Tarık => 4 gün  (Api entegrasyonu Kargo)------- Yapıldı (15.11.2019)
+3)	Enes => 4 gün (Loglama ve ek veri tabanı) ----- (Yapılıyor...)
+4)	Ozan => (Api Entegrasyonu E Ticaret) -------- daha zamanı var
+5)  Kasım 18 Tarık (Api),Enes(Loglama) ve Esra veritabanı bitiyor... (sadece Enes kaldı !!!)
 6)  Aralık 5 Tarık ve Enes Backend bitişi...
 7)  Aralık 10 Cem ve Gökhan Frontend bitişi...
 8)  Aralık 13 Ozan Api Entegrasyon Bitişi...
