@@ -19,6 +19,7 @@ namespace Project.MODEL.Entities
 
         public virtual List<OrderDetail> OrderDetails { get; set; }
 
+        public virtual List<ProductFeature> ProductFeatures { get; set; }
 
     }
 }
