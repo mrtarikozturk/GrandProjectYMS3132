@@ -9,5 +9,10 @@ namespace Project.MAP.Options
 {
    public class FeatureMap: BaseMap<Feature>
     {
+        public FeatureMap()
+        {
+            Property(x => x.FeatureName).HasColumnName("OzellikAdi");
+            Property(x => x.Description).HasColumnName("Aciklama");
+        }
     }
 }

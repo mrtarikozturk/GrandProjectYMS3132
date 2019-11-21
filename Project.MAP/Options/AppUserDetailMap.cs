@@ -9,5 +9,11 @@ namespace Project.MAP.Options
 {
   public  class AppUserDetailMap: BaseMap<AppUserDetail>
     {
+        public AppUserDetailMap()
+        {
+            Property(x => x.FirstName).HasColumnName("Adi");
+            Property(x => x.LastName).HasColumnName("SoyAdi");
+            Property(x => x.Address).HasColumnName("Adresi");
+        }
     }
 }

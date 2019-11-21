@@ -9,5 +9,9 @@ namespace Project.MAP.Options
 {
     public class OrderMap:BaseMap<Order>
     {
+        public OrderMap()
+        {
+            Property(x => x.ShippedAdress).HasColumnName("GonderilenAdress");
+        }
     }
 }

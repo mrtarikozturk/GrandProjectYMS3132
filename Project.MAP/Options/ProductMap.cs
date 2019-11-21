@@ -11,7 +11,10 @@ namespace Project.MAP.Options
     {
         public ProductMap()
         {
-            Property(x => x.UnitPrice).HasColumnType("money");
+            Property(x => x.ProductName).HasColumnName("UrunAdi");
+            Property(x => x.ImagePath).HasColumnName("UrunResmi");
+            Property(x => x.UnitsInStock).HasColumnName("StokMiktari");
+            Property(x => x.UnitPrice).HasColumnName("BirimFiyati").HasColumnType("money");
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Project.MAP.Options
     {
         public ProductFeatureMap()
         {
+            Property(x => x.Value).HasColumnName("Degeri");
+
             Ignore(x => x.ID);
             HasKey(x => new { x.ProductID, x.FeatureID });
         }

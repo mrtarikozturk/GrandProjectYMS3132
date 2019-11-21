@@ -12,6 +12,14 @@ namespace Project.MAP.Options
         public AppUserMap()
         {
             HasOptional(x => x.Profile).WithRequired(x => x.AppUser);
+
+            Property(x => x.UserName).HasColumnName("KullaniciAdi");
+            Property(x => x.Password).HasColumnName("Sifre");
+            Property(x => x.Email).HasColumnName("e-Posta");
+            Property(x => x.IsActive).HasColumnName("AktifKullanici");
+            Property(x => x.ActivateionCode).HasColumnName("AktivasyonKodu");
+            Property(x => x.Role).HasColumnName("KullaniciRolu");
+            
         }
     }
 }

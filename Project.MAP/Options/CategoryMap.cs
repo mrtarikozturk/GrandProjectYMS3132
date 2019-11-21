@@ -9,5 +9,10 @@ namespace Project.MAP.Options
 {
   public  class CategoryMap:BaseMap<Category>
     {
+        public CategoryMap()
+        {
+            Property(x => x.CategoryName).HasColumnName("KategoriAdi");
+            Property(x => x.Description).HasColumnName("Aciklama");
+        }
     }
 }
