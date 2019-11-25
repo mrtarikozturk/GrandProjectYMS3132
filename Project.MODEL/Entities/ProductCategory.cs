@@ -18,5 +18,6 @@ namespace Project.MODEL.Entities
 
         public virtual Product Product { get; set; }
 
+        // burası duzeltıldı...
     }
 }
