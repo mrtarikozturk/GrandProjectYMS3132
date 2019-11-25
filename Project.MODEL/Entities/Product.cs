@@ -8,6 +8,11 @@ namespace Project.MODEL.Entities
 {
    public class Product:BaseEntity
     {
+        public Product()
+        {
+            Categories = new List<ProductCategory>();
+        }
+
         public string ProductName { get; set; }
         public string ImagePath { get; set; }
         public int UnitsInStock { get; set; }
@@ -15,7 +20,8 @@ namespace Project.MODEL.Entities
 
         // relational properties
 
-        public virtual List<Category> Categories { get; set; }
+        public virtual List<ProductCategory> Categories { get; set; }
+
 
         public virtual List<OrderDetail> OrderDetails { get; set; }
 
