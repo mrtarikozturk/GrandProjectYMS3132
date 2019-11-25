@@ -73,8 +73,44 @@ namespace Project.DAL.StrategyPattern
 
 
 
+            #region VeriGetirme1
+            //Random rnd = new Random();
+            //List<Category> cat = new List<Category>();
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    Category c = new Category();
+
+            //    c.CategoryName = new Commerce("tr").Categories(1)[0];
+            //    c.Description = new Lorem("tr").Sentence(100);
+            //    context.Categories.Add(c);
+            //    context.SaveChanges();
+            //    cat.Add(c);
+
+
+            //    for (int x = 0; x < 10; x++)
+            //    {
+            //        Product p = new Product();
+
+            //        p.ProductName = new Commerce("tr").ProductName();
+            //        p.UnitPrice = Convert.ToDecimal(new Commerce("tr").Price());
+            //        p.UnitsInStock = rnd.Next(5, 500);
+            //        p.ImagePath = new Images().Nightlife();
+            //        p.Categories = cat;
+
+            //        context.Products.Add(p);
+
+            //        context.SaveChanges();
+
+
+
+            //    }
+            //    //cat = null; tek kategori gelsi n diye.
+
+            //} 
+            #endregion
+
             Random rnd = new Random();
-            List<Category> cat = new List<Category>();
+
             for (int i = 0; i < 5; i++)
             {
                 Category c = new Category();
@@ -83,10 +119,7 @@ namespace Project.DAL.StrategyPattern
                 c.Description = new Lorem("tr").Sentence(100);
                 context.Categories.Add(c);
                 context.SaveChanges();
-                cat.Add(c);
-
-
-                for (int x = 0; x < 10; x++)
+                for (int j = 0; j < 20; j++)
                 {
                     Product p = new Product();
 
@@ -94,18 +127,31 @@ namespace Project.DAL.StrategyPattern
                     p.UnitPrice = Convert.ToDecimal(new Commerce("tr").Price());
                     p.UnitsInStock = rnd.Next(5, 500);
                     p.ImagePath = new Images().Nightlife();
-                    p.Categories = cat;
+
 
                     context.Products.Add(p);
-
                     context.SaveChanges();
 
-                    
+
+                    ProductCategory pc = new ProductCategory();
+                    pc.ProductID = p.ID;
+                    pc.CategoryID = c.ID;
+                    context.ProductCategories.Add(pc);
+                    context.SaveChanges();
+                    if (i == 4)
+                    {
+                        ProductCategory pc2 = new ProductCategory();
+                        pc2.ProductID = p.ID;
+                        pc2.CategoryID = c.ID - 1;
+                        context.ProductCategories.Add(pc2);
+                    }
+                    context.SaveChanges();
 
                 }
-                //cat = null; tek kategori gelsi n diye.
 
-            }
+            }       //Category eklendi.
+
+            //Product Eklendi.
 
 
         }
