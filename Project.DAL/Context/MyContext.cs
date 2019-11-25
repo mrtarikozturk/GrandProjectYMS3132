@@ -28,7 +28,6 @@ namespace Project.DAL.Context
                   modelBuilder.Configurations.Add(new ProductCategoryMap());
                   modelBuilder.Configurations.Add(new ProductFeatureMap());
                   modelBuilder.Configurations.Add(new ProductMap());
-                    
 
         }
 

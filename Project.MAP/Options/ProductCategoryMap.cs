@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project.MAP.Options
 {
-  public class ProductCategoryMap:BaseMap<ProductCategory>
+    public class ProductCategoryMap:BaseMap<ProductCategory>
     {
         public ProductCategoryMap()
         {

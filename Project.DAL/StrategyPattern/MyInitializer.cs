@@ -72,6 +72,43 @@ namespace Project.DAL.StrategyPattern
             }
 
 
+            #region VeriCekme1
+
+            //Random rnd = new Random();
+            //List<Category> cat = new List<Category>();
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    Category c = new Category();
+
+            //    c.CategoryName = new Commerce("tr").Categories(1)[0];
+            //    c.Description = new Lorem("tr").Sentence(100);
+            //    context.Categories.Add(c);
+            //    context.SaveChanges();
+            //    cat.Add(c);
+
+
+            //    for (int x = 0; x < 10; x++)
+            //    {
+            //        Product p = new Product();
+
+            //        p.ProductName = new Commerce("tr").ProductName();
+            //        p.UnitPrice = Convert.ToDecimal(new Commerce("tr").Price());
+            //        p.UnitsInStock = rnd.Next(5, 500);
+            //        p.ImagePath = new Images().Nightlife();
+            //        p.Categories = cat;
+
+            //        context.Products.Add(p);
+
+            //        context.SaveChanges();
+
+
+
+            //    }
+            //    //cat = null; tek kategori gelsi n diye.
+
+            //} 
+            #endregion
+
 
             #region VeriGetirme1
             //Random rnd = new Random();
