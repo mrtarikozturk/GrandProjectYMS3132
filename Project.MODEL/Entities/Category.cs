@@ -18,14 +18,11 @@ namespace Project.MODEL.Entities
 
 
 
-        // relational properties
+        // Relational Properties
 
-        public virtual List<Product> Products { get; set; }
+        public virtual List<ProductCategory> Products { get; set; }
 
-        public Category()
-        {
-            Products = new List<Product>();
-        }
+
 
     }
 }
