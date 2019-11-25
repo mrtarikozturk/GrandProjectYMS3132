@@ -25,12 +25,8 @@ namespace Project.DAL.Context
                   modelBuilder.Configurations.Add(new FeatureMap());
                   modelBuilder.Configurations.Add(new OrderMap());
                   modelBuilder.Configurations.Add(new OrderDetailMap());
-                  modelBuilder.Configurations.Add(new ProductCategoryMap());
                   modelBuilder.Configurations.Add(new ProductFeatureMap());
                   modelBuilder.Configurations.Add(new ProductMap());
-       
-
-            
 
         }
 
@@ -42,7 +38,7 @@ namespace Project.DAL.Context
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+
     }
 
 }

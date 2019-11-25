@@ -55,7 +55,6 @@
     <Compile Include="Options\FeatureMap.cs" />
     <Compile Include="Options\OrderDetailMap.cs" />
     <Compile Include="Options\OrderMap.cs" />
-    <Compile Include="Options\ProductCategoryMap.cs" />
     <Compile Include="Options\ProductFeatureMap.cs" />
     <Compile Include="Options\ProductMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

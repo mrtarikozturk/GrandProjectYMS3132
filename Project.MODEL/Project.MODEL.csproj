@@ -49,7 +49,6 @@
     <Compile Include="Entities\Feature.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\ProductCategory.cs" />
     <Compile Include="Entities\ProductFeature.cs" />
     <Compile Include="Enums\DataStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
