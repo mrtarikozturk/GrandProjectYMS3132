@@ -52,6 +52,9 @@
     <Compile Include="Entities\ProductCategory.cs" />
     <Compile Include="Entities\ProductFeature.cs" />
     <Compile Include="Enums\DataStatus.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Enums\PackingStatus.cs" />
+    <Compile Include="Enums\PaymentOption.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
