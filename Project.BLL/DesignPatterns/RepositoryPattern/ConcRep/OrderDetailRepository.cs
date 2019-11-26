@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
 {
-    public class OrderDetailRepository: BaseRepository<OrderDetail>
+    public class OrderDetailRepository : BaseRepository<OrderDetail>
     {
     }
 }

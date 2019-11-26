@@ -18,7 +18,6 @@ namespace Project.MAP.Options
             Property(x => x.Status).HasColumnName("VeriDurumu");
             Property(x => x.CreatedBy).HasColumnName("Olusturan");
             Property(x => x.ModifiedBy).HasColumnName("Degistiren");
-
         }
     }
 }

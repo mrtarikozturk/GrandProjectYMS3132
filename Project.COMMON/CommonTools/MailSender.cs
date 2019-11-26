@@ -12,11 +12,9 @@ namespace Project.COMMON.CommonTools
     {
         public static void Send(string receiver, string password = "Frkn511247+", string body = "Deneme", string subject = "Test", string sender = "furkanpython@gmail.com")
         {
-
             MailAddress senderEmail = new MailAddress(sender);
 
             MailAddress receiverEmail = new MailAddress(receiver);//burada item.Email kullanılır
-
 
             SmtpClient smtp = new SmtpClient
             {
@@ -28,12 +26,8 @@ namespace Project.COMMON.CommonTools
                 Credentials = new NetworkCredential(senderEmail.Address, password)
             };
 
-
-
-
             using (var mesaj = new MailMessage(senderEmail, receiverEmail)
             {
-                //Object initializer
                 Subject = subject,
                 Body = body
             })
@@ -41,10 +35,6 @@ namespace Project.COMMON.CommonTools
                 //using scope'u
                 smtp.Send(mesaj); //Mail'i gönderdik.
             }
-
-
-
-
         }
     }
 }

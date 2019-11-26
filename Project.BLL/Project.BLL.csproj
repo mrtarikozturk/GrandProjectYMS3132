@@ -55,6 +55,7 @@
     <Compile Include="DesignPatterns\RepositoryPattern\ConcRep\FeatureRepository.cs" />
     <Compile Include="DesignPatterns\RepositoryPattern\ConcRep\OrderDetailRepository.cs" />
     <Compile Include="DesignPatterns\RepositoryPattern\ConcRep\OrderRepository.cs" />
+    <Compile Include="DesignPatterns\RepositoryPattern\ConcRep\ProductCategoryRepository.cs" />
     <Compile Include="DesignPatterns\RepositoryPattern\ConcRep\ProductFeatureRepository.cs" />
     <Compile Include="DesignPatterns\RepositoryPattern\ConcRep\ProductRepository.cs" />
     <Compile Include="DesignPatterns\RepositoryPattern\IntRep\IRepository.cs" />

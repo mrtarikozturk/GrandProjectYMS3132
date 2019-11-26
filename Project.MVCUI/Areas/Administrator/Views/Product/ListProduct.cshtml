@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "ListProduct";
+}
+
+@model Tuple<List<Product>, List<ProductCategory>, List<Category>>
+
+<h2>Index</h2>
+
+<div class="panel panel-primary">
+    <div class="panel panel-body">
+
+        <table class="table table-hover">
+
+            <tr>
+                <th>UrunAdi</th>
+                <th> Fiyat</th>
+                <th style="text-align:center"> Kategorileri</th>
+
+            </tr>
+
+
+            @foreach (Product item in Model.Item1)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice</td>
+                    @foreach (ProductCategory item2 in Model.Item2)
+                    {
+                        if (item2.ProductID == item.ID)
+                        {
+                            <td>@Model.Item3.FirstOrDefault(x => x.ID == item2.CategoryID).CategoryName</td>
+                        }
+                    }
+                </tr>
+
+            }
+        </table>
+
+    </div>
+</div>
+
+

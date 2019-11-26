@@ -8,31 +8,40 @@ using System.Threading.Tasks;
 
 namespace Project.BLL.DesignPatterns.RepositoryPattern.IntRep
 {
-   public interface IRepository<T> where T:BaseEntity
+    public interface IRepository<T> where T : BaseEntity
     {
         // Listeleme metotları
 
         List<T> GetAll();
+
         List<T> GetActives();
+
         List<T> GetUpdates();
+
         List<T> GetPassive();
 
-        // Modifikasyonlar
+
+        // Ekleme, Silme, Güncelleme Metotları
 
         void Add(T item);
+
         void Update(T item);
+
         void Delete(T item);
+
         void SpecialDelete(T item);
 
-        // Queries
+
+        //Sorgu Metotları
 
         List<T> where(Expression<Func<T, bool>> exp);
+
         bool Any(Expression<Func<T, bool>> exp);
+
         T FirstOrDefault(Expression<Func<T, bool>> exp);
+
         object Select(Expression<Func<T, bool>> exp);
+
         T GetByID(int id);
-
-
-
     }
 }

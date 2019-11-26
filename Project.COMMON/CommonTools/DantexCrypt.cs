@@ -14,6 +14,7 @@ namespace Project.COMMON.CommonTools
             Random rnd = new Random();
             char[] charArray = { '*', '_', '?' };
             string hashedCode = "";
+
             foreach (char item in a)
             {
                 int tempInteger;
@@ -32,9 +33,7 @@ namespace Project.COMMON.CommonTools
                         hashedCode += $"{tempInteger.ToString()}{charArray[2]}";
                         break;
                 }
-
             }
-
             return hashedCode;
         }
 
@@ -42,26 +41,17 @@ namespace Project.COMMON.CommonTools
         {
             string decryptedCode = "";
 
-
-
-
             List<string> parts = Regex.Split(a, @"(?<=[*_?])").ToList(); //split gibi iş yapar anca *_? karakterlerini de alır..
-
-
 
             foreach (string item in parts)
             {
-
                 if (item.Contains("*"))
                 {
-
                     string element = item.TrimEnd('*');
-
                     int asciiCode = (Convert.ToInt32(element) / 2) - 1;
                     string character = Convert.ToChar(asciiCode).ToString();
                     decryptedCode += character;
                 }
-
                 else if (item.Contains("_"))
                 {
                     string element2 = item.TrimEnd('_');
@@ -69,24 +59,17 @@ namespace Project.COMMON.CommonTools
                     string character2 = Convert.ToChar(asciiCode2).ToString();
                     decryptedCode += character2;
                 }
-
                 else if (item.Contains("?"))
                 {
-
                     string element3 = item.TrimEnd('?');
                     int asciiCode3 = (Convert.ToInt32(element3) / 4) - 3;
                     string character3 = Convert.ToChar(asciiCode3).ToString();
                     decryptedCode += character3;
                 }
-
-
-
-
-
-
             }
             return decryptedCode;
 
+            #region İptal
 
             //string[] saltArray = a.Split('*','_','?');
             //foreach (string item in saltArray)
@@ -96,7 +79,8 @@ namespace Project.COMMON.CommonTools
             //    string character = Convert.ToChar(tempChar).ToString();
             //    decryptedCode += character;
             //}
-            //return decryptedCode;
+            //return decryptedCode; 
+            #endregion
         }
     }
 }

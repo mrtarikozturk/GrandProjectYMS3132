@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Project.MODEL.Entities
 {
-    public class Order:BaseEntity
+    public class Order : BaseEntity
     {
         public string ShippedAdress { get; set; }
+
         public int AppUserID { get; set; }
 
-        // relational properties
+        // Relational Properties
 
         public virtual AppUser AppUser { get; set; }
-        public virtual List<OrderDetail> OrderDetails { get; set; }
 
+        public virtual List<OrderDetail> OrderDetails { get; set; }
     }
 }

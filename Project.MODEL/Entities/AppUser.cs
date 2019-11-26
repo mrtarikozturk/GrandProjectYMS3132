@@ -9,23 +9,28 @@ namespace Project.MODEL.Entities
 {
    public class AppUser:BaseEntity
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public bool IsActive { get; set; }
-        public Guid? ActivateionCode { get; set; }
-
-        public UserRole Role { get; set; }
-
         public AppUser()
         {
             Role = UserRole.Member;
-            ActivateionCode = Guid.NewGuid();
+            ActivationCode = Guid.NewGuid();
         }
 
-        // relational properties
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public string Email { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public Guid? ActivationCode { get; set; }
+
+        public UserRole Role { get; set; }
+
+        // Relational properties
 
         public virtual AppUserDetail Profile { get; set; }
+
         public virtual List<Order> Orders { get; set; }
     }
 }

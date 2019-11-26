@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model Tuple<List<Product>, List<ProductCategory>, List<Category>>
 @{
     ViewBag.Title = "Index";
 }
@@ -18,19 +18,18 @@
             </tr>
 
 
-            @foreach (Product item in Model)
+            @foreach (Product item in Model.Item1)
             {
                 <tr>
                     <td>@item.ProductName</td>
                     <td>@item.UnitPrice</td>
-
-                    @for (int i = 0; i < item.Categories.Count(); i++)
+                    @foreach (ProductCategory item2 in Model.Item2)
                     {
-                        <td >
-                            @item.Categories[i].CategoryName
-                        </td>
+                        if (item2.ProductID == item.ID)
+                        {
+                            <td>@Model.Item3.FirstOrDefault(x => x.ID == item2.CategoryID).CategoryName</td>
+                        }
                     }
-
                 </tr>
 
             }
@@ -38,3 +37,5 @@
 
     </div>
 </div>
+
+

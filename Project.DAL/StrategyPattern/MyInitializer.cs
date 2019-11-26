@@ -35,8 +35,6 @@ namespace Project.DAL.StrategyPattern
 
             //} 
             #endregion
-
-
             for (int i = 0; i < 10; i++)
             {
                 AppUser ap = new AppUser();
@@ -45,32 +43,21 @@ namespace Project.DAL.StrategyPattern
                 ap.Email = new Internet("tr").Email();
 
                 context.AppUsers.Add(ap);
-
                 context.SaveChanges();
-
-
             }
-
-
 
             for (int i = 1; i < 11; i++)
             {
                 AppUserDetail apd = new AppUserDetail();
 
                 apd.ID = i; //Birebir ilişkisi oldugundan dolayı id'leri bu sekilde verdik..
-
                 apd.FirstName = new Name("tr").FirstName();
-
                 apd.LastName = new Name("tr").LastName();
-
                 apd.Address = new Address("tr").Locale;
 
                 context.AppUserDetails.Add(apd);
-
                 context.SaveChanges();
-
             }
-
 
             #region VeriCekme1
 
@@ -108,8 +95,6 @@ namespace Project.DAL.StrategyPattern
 
             //} 
             #endregion
-
-
             #region VeriGetirme1
             //Random rnd = new Random();
             //List<Category> cat = new List<Category>();
@@ -154,8 +139,10 @@ namespace Project.DAL.StrategyPattern
 
                 c.CategoryName = new Commerce("tr").Categories(1)[0];
                 c.Description = new Lorem("tr").Sentence(100);
+
                 context.Categories.Add(c);
                 context.SaveChanges();
+
                 for (int j = 0; j < 20; j++)
                 {
                     Product p = new Product();
@@ -165,16 +152,15 @@ namespace Project.DAL.StrategyPattern
                     p.UnitsInStock = rnd.Next(5, 500);
                     p.ImagePath = new Images().Nightlife();
 
-
                     context.Products.Add(p);
                     context.SaveChanges();
-
 
                     ProductCategory pc = new ProductCategory();
                     pc.ProductID = p.ID;
                     pc.CategoryID = c.ID;
                     context.ProductCategories.Add(pc);
                     context.SaveChanges();
+
                     if (i == 4)
                     {
                         ProductCategory pc2 = new ProductCategory();
@@ -183,14 +169,9 @@ namespace Project.DAL.StrategyPattern
                         context.ProductCategories.Add(pc2);
                     }
                     context.SaveChanges();
-
                 }
-
             }       //Category eklendi.
-
-            //Product Eklendi.
-
-
+                    //Product Eklendi.
         }
 
 
