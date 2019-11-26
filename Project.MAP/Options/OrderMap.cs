@@ -11,7 +11,11 @@ namespace Project.MAP.Options
     {
         public OrderMap()
         {
-            Property(x => x.ShippedAdress).HasColumnName("GonderilenAdress");
+            Property(x => x.Address).HasColumnName("Adres");
+            Property(x => x.City).HasColumnName("Sehir");
+            Property(x => x.Town).HasColumnName("Ilce");
+            Property(x => x.District).HasColumnName("Mahalle");
+            Property(x => x.Phone).HasColumnName("Telefon");
         }
     }
 }

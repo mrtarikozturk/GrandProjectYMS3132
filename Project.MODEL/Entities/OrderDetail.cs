@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.MODEL.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,17 @@ namespace Project.MODEL.Entities
 {
     public class OrderDetail : BaseEntity
     {
-        public int ProductID { get; set; }
-
-        public int OrderID { get; set; }
-
+    
+        public short Amount { get; set; }
         public decimal? TotalPrice { get; set; }
+        public DateTime? PaymentDate { get; set; }
+        public OrderStatus OrderStatus{ get; set; }
+        public PackingStatus PackingStatus { get; set; }
+        public PaymentOption PaymentOption { get; set; }
+
+
+        public int ProductID { get; set; }
+        public int OrderID { get; set; }
 
         // Relational Properties
 

@@ -8,8 +8,11 @@ namespace Project.MODEL.Entities
 {
     public class Order : BaseEntity
     {
-        public string ShippedAdress { get; set; }
-
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Town { get; set; }
+        public string District { get; set; }
+        public string Phone { get; set; }
         public int AppUserID { get; set; }
 
         // Relational Properties
