@@ -89,7 +89,8 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
             //Burası önemli. Find() metodu ile id üzerinden arama yapılırsa veri silinmiş olsa dahi getirir. Çünkü biz veriyi gerçekten silmiyoruz. Silindi olarak işaretliyoruz. Bir nevi görünmez yapıyoruz. Dolayısıyla burada buna dikkat etmezsek ise veri tekrar görünür olur. 
             #endregion
 
-            return db.Set<T>().FirstOrDefault(x => x.ID == id && x.Status != DataStatus.Deleted);
+            //return db.Set<T>().FirstOrDefault(x => x.ID == id && x.Status != DataStatus.Deleted);
+            return db.Set<T>().Find(id);
         }
 
         public List<T> where(Expression<Func<T, bool>> exp)
