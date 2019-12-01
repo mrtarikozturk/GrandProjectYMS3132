@@ -1829,6 +1829,9 @@
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Enums\Durum.cs" />
+    <Compile Include="Models\HareketVM.cs" />
+    <Compile Include="Models\KargoVM.cs" />
     <Compile Include="Models\PaymentVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

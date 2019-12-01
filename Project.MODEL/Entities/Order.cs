@@ -8,6 +8,7 @@ namespace Project.MODEL.Entities
 {
     public class Order : BaseEntity
     {
+        public string TC { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string Town { get; set; }

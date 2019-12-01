@@ -84,9 +84,11 @@ namespace Project.MVCUI.Controllers
             // return RedirectToAction("ProductList");  
             return View(Tuple.Create(new Order(), new PaymentVM()));
         }
+        [HttpPost]
         public ActionResult SiparisiOnayla([Bind(Prefix = "Item1")] Order item, [Bind(Prefix = "Item2")] PaymentVM item2)
         {
             bool result = false;
+            bool result2 = false;
            
             using (HttpClient client = new HttpClient())
             {
@@ -105,6 +107,7 @@ namespace Project.MVCUI.Controllers
 
                 HttpResponseMessage sonuc = postTask.Result;
 
+                
                 if (sonuc.IsSuccessStatusCode)
                 {
                     result = true;
@@ -113,14 +116,14 @@ namespace Project.MVCUI.Controllers
                 {
                     result = false;
                 }
-
+                
 
             }
 
             if (result)
             {
                 //AppUser kullanici = Session["member"] as AppUser;
-                item.AppUserID = 7; //Order'in kim tarafından sipariş edildigini belirlersiniz
+                item.AppUserID = (Session["member"] as AppUser).ID; //Order'in kim tarafından sipariş edildigini belirlersiniz
                 oRep.Add(item); //save edildiginde Order nesnesinin ID'si üretilir.
 
                 Cart sepet = Session["scart"] as Cart;
@@ -134,7 +137,55 @@ namespace Project.MVCUI.Controllers
 
                 }
                 TempData["odeme"] = "Siparişiniz bize ulasmıstır..Tesekkür ederiz";
-                return RedirectToAction("ProductList");
+
+                using (HttpClient client = new HttpClient())
+                {
+                    KargoVM kargo = new KargoVM();
+
+                    //http://localhost:57177/api/Payment/ReceivePayment
+
+                    client.BaseAddress = new Uri("https://localhost:44333/api/");
+
+                    kargo.Adi = (Session["member"] as AppUser).Profile.FirstName;
+                    kargo.Soyadi= (Session["member"] as AppUser).Profile.LastName;
+                    kargo.TCKimlikNumarası = item.TC;
+                    kargo.Adres = item.Address;
+                    kargo.Il = item.City;
+                    kargo.Ilce = item.District;
+                    kargo.Mahalle = item.Town;
+                    kargo.Telefon = item.Phone;
+                    
+
+
+
+                    var postTask = client.PostAsJsonAsync("Home/KargoOlustur", kargo);
+
+
+
+                    HttpResponseMessage sonuc = postTask.Result;
+
+
+                    if (sonuc.IsSuccessStatusCode)
+                    {
+                        result2 = true;
+                        TempData["kargo"] = sonuc.StatusCode;
+                        // buradan emın degılız !!!
+                    }
+                    else
+                    {
+                        result2 = false;
+                        TempData["kargo"] = sonuc.StatusCode;
+                        // buradan emın degılız !!!
+                    }
+
+
+
+
+                }
+                
+
+                
+                
 
             }
 
@@ -144,7 +195,7 @@ namespace Project.MVCUI.Controllers
                 return RedirectToAction("ProductList");
             }
 
-
+            return RedirectToAction("ProductList");
         }
     }
 }
