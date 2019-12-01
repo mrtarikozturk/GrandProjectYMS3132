@@ -101,7 +101,7 @@ namespace Project.MVCUI.Controllers
 
                 var postTask = client.PostAsJsonAsync("Payment/ReceivePayment", item2);
 
-              
+               // furkanın yolu:D Sill
 
                 HttpResponseMessage sonuc = postTask.Result;
 
