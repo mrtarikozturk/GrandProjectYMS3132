@@ -93,9 +93,9 @@ namespace Project.MVCUI.Controllers
             using (HttpClient client = new HttpClient())
             {
 
-                //http://localhost:57177/api/Payment/ReceivePayment
+                //http://localhost:61183/api/Payment/ReceivePayment
 
-                client.BaseAddress = new Uri("http://localhost:57177/api/");
+                client.BaseAddress = new Uri("http://localhost:61183/api/");
                 Cart sepet = Session["scart"] as Cart;
                 item2.PaymentPrice = sepet.TotalPrice.Value;
 
@@ -103,7 +103,7 @@ namespace Project.MVCUI.Controllers
 
                 var postTask = client.PostAsJsonAsync("Payment/ReceivePayment", item2);
 
-               // furkanın yolu:D Sill
+               
 
                 HttpResponseMessage sonuc = postTask.Result;
 
@@ -133,6 +133,10 @@ namespace Project.MVCUI.Controllers
                     OrderDetail od = new OrderDetail();
                     od.OrderID = item.ID;
                     od.ProductID = urun.ID;
+                    od.TotalPrice = urun.SubTotal;
+                    od.Amount = urun.Amount;
+                    od.PaymentDate = DateTime.Now;
+                    
                     odRep.Add(od);
 
                 }
@@ -150,6 +154,7 @@ namespace Project.MVCUI.Controllers
                     kargo.Soyadi= (Session["member"] as AppUser).Profile.LastName;
                     kargo.TCKimlikNumarası = item.TC;
                     kargo.Adres = item.Address;
+                    kargo.Mail = (Session["member"] as AppUser).Email;
                     kargo.Il = item.City;
                     kargo.Ilce = item.District;
                     kargo.Mahalle = item.Town;
@@ -168,14 +173,12 @@ namespace Project.MVCUI.Controllers
                     if (sonuc.IsSuccessStatusCode)
                     {
                         result2 = true;
-                        TempData["kargo"] = sonuc.StatusCode;
-                        // buradan emın degılız !!!
+                       
                     }
                     else
                     {
                         result2 = false;
-                        TempData["kargo"] = sonuc.StatusCode;
-                        // buradan emın degılız !!!
+                        
                     }
 
 
@@ -194,6 +197,30 @@ namespace Project.MVCUI.Controllers
                 TempData["odeme"] = "Odeme ile ilgili bir sıkıntı olustu. Lütfen banka ile iletişime geciniz";
                 return RedirectToAction("ProductList");
             }
+
+            return RedirectToAction("ProductList");
+        }
+        public ActionResult Delete(int id)
+        {
+            if (Session["scart"] != null)
+            {
+                Cart c = Session["scart"] as Cart;
+                c.Sepettensil(id);
+
+                if ((Session["scart"] as Cart).Sepetim.Count == 0)
+                {
+                    Session.Remove("scart");
+                    TempData["gitti"] = "Sepetiniz bosaltılmıstır";
+
+                    return RedirectToAction("ProductList");
+
+                }
+
+                return RedirectToAction("CartPage");
+
+
+            }
+            TempData["silinecekYok"] = "Sepetiniz bos oldugu icin bu sayfaya gitmenizde bir mantık yok";
 
             return RedirectToAction("ProductList");
         }
