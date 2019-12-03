@@ -1822,7 +1822,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Filters\ActFilter.cs" />
-    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\AuthFilter.cs" />
     <Compile Include="Filters\ResFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1830,8 +1830,10 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Enums\Durum.cs" />
+    <Compile Include="Models\Enums\Keyword.cs" />
     <Compile Include="Models\HareketVM.cs" />
     <Compile Include="Models\KargoVM.cs" />
+    <Compile Include="Models\LogVM.cs" />
     <Compile Include="Models\PaymentVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
