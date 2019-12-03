@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Filters
 {
-    public class ResFilter : AuthorizeAttribute, IResultFilter
+    public class ResFilter : FilterAttribute, IResultFilter
     {
         
 
@@ -40,8 +40,8 @@ namespace Project.MVCUI.Filters
                     log.UserName = "Anonim Kullanıcı";
                 }
 
-                log.ControllerName = filterContext.RouteData.Values["ControllerName"].ToString();
-                log.ActionName = filterContext.RouteData.Values["ActionName"].ToString();
+                log.ControllerName = filterContext.RouteData.Values["Controller"].ToString();
+                log.ActionName = filterContext.RouteData.Values["Action"].ToString();
                 log.Description = Keyword.Exit;
                 log.Information = "View çalıştıktan sonra kaydedilmiştir.";
                 var postTask = client.PostAsJsonAsync("Home/AddLog", log);
@@ -85,8 +85,8 @@ namespace Project.MVCUI.Filters
                 {
                     log.UserName = "Anonim Kullanıcı";
                 }
-                log.ControllerName = filterContext.RouteData.Values["ControllerName"].ToString();
-                log.ActionName = filterContext.RouteData.Values["ActionName"].ToString();
+                log.ControllerName = filterContext.RouteData.Values["Controller"].ToString();
+                log.ActionName = filterContext.RouteData.Values["Action"].ToString();
                 log.Description = Keyword.Entry;
                 log.Information = "View çalışmadan önce kaydedilmiştir.";
                 var postTask = client.PostAsJsonAsync("Home/AddLog", log);

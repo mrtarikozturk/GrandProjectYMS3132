@@ -13,7 +13,7 @@ namespace Project.MVCUI.Filters
             if (filterContext.HttpContext.Session["oturum"] == null)
             {
                 //Login sayfasına yönlendirmek
-                filterContext.Result = new RedirectResult("/Home/Index");
+                filterContext.Result = new RedirectResult("/Home/Register");
             }
         }
     }

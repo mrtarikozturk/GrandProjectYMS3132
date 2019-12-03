@@ -1,5 +1,6 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.MODEL.Entities;
+using Project.MVCUI.Filters;
 using Project.MVCUI.Models;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,7 @@ namespace Project.MVCUI.Controllers
             TempData["message"] = "Sepetinizde ürün bulunmamaktadır";
             return RedirectToAction("ProductList");
         }
-
+        
         public ActionResult SiparisiOnayla()
         {
             // if (Session["member"] != null)
