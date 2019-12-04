@@ -1,4 +1,5 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
+using Project.MVCUI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Administrator.Controllers
 {
+    [ActFilter, ResFilter]
     public class OrderController : Controller
     {
         #region Açıklama

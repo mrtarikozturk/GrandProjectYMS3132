@@ -2,6 +2,7 @@
 using Project.COMMON.CommonTools;
 using Project.MODEL.Entities;
 using Project.MODEL.Enums;
+using Project.MVCUI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
+    [ActFilter,ResFilter]
     public class HomeController : Controller
     {
         #region Açıklama

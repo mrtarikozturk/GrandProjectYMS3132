@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
+    [ActFilter, ResFilter]
     public class MemberController : Controller
     {
         ProductRepository pRep;
