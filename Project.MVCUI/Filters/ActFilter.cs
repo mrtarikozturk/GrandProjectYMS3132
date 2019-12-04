@@ -104,7 +104,7 @@ namespace Project.MVCUI.Filters
                 log.Description = Keyword.Entry;
                 log.Information = "Metot çalışmadan önce kaydedildi.";
                 var postTask = client.PostAsJsonAsync("Home/AddLog", log);
-                HttpResponseMessage sonuc = postTask.Result;
+               HttpResponseMessage sonuc = postTask.Result;
 
 
                 if (sonuc.IsSuccessStatusCode)

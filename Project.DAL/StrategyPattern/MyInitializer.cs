@@ -169,9 +169,29 @@ namespace Project.DAL.StrategyPattern
                         context.ProductCategories.Add(pc2);
                     }
                     context.SaveChanges();
+
+
+                    for (int k = 0; k < 40; k++)
+                    {
+                        Feature f = new Feature();
+                        f.FeatureName = new Commerce("tr").ProductMaterial();
+                        f.Description = new Lorem("tr").Sentence(50);
+                        context.Features.Add(f);
+                        context.SaveChanges();
+
+                        ProductFeature pf = new ProductFeature();
+                        pf.ProductID = p.ID;
+                        pf.FeatureID = f.ID;
+                        pf.Value = new Commerce("tr").Color();
+                        context.ProductFeatures.Add(pf);
+                        context.SaveChanges();
+                    }
+               
                 }
+
             }       //Category eklendi.
                     //Product Eklendi.
+                    // feature ve value eklendi
         }
 
 

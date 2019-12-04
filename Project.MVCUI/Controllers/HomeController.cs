@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
-    [ActFilter,ResFilter]
+    [ActFilter, ResFilter]
     public class HomeController : Controller
     {
         #region Açıklama
@@ -22,15 +22,18 @@ namespace Project.MVCUI.Controllers
         #endregion
 
         AppUserRepository arep;
-
+        
         AppUserDetailRepository adrep;
 
+       
         public HomeController()
         {
             
             arep = new AppUserRepository();
             adrep = new AppUserDetailRepository();
         }
+
+
 
         public ActionResult Register()
         {

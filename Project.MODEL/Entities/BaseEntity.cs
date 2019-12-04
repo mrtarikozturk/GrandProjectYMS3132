@@ -25,9 +25,7 @@ namespace Project.MODEL.Entities
 
         public DataStatus? Status { get; set; }
 
-        public string CreatedBy { get; set; }
-
-        public string ModifiedBy { get; set; }
+       
 
     }
 }
