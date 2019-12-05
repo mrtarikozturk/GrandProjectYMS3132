@@ -27,6 +27,7 @@ namespace Project.MVCUI.Controllers
         ProductCategoryRepository pcRep;
         public MemberController()
         {
+            cRep = new CategoryRepository();
             pcRep = new ProductCategoryRepository();
             pRep = new ProductRepository();
 
