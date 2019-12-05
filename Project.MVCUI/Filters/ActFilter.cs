@@ -2,6 +2,7 @@
 using Project.MODEL.Entities;
 using Project.MVCUI.Models;
 using Project.MVCUI.Models.Enums;
+using Project.MVCUI.Models.VMClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
