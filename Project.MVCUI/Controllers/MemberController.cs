@@ -49,7 +49,7 @@ namespace Project.MVCUI.Controllers
             {
                 // sorun category sını belırledıgımız ıstedıgımız urunlerı getıremıyoruz
                 //productın ıcınden cekmelıyız
-                return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToPagedList(sayfa, 10));
+                return View(pRep.Where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToPagedList(sayfa, 10));
 
                 //return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToList().ToPagedList(sayfa, 10));
             }
