@@ -1,10 +1,12 @@
-﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
+﻿using PagedList;
+using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.MODEL.Entities;
 using Project.MVCUI.AuthenticationClasses;
 using Project.MVCUI.Filters;
 using Project.MVCUI.Models.VMClasses;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -12,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
-    [ActFilter, ResFilter, MemberAuthentication]
+    //[ActFilter, ResFilter]
     public class MemberController : Controller
     {
         ProductRepository pRep;
@@ -20,19 +22,70 @@ namespace Project.MVCUI.Controllers
         OrderRepository oRep;
 
         OrderDetailRepository odRep;
-
+        CategoryRepository cRep;
+        ProductCategoryRepository pcRep;
         public MemberController()
         {
+            pcRep = new ProductCategoryRepository();
             pRep = new ProductRepository();
 
             oRep = new OrderRepository();
 
             odRep = new OrderDetailRepository();
         }
-
-        public ActionResult ProductList()
+        // GET: Member
+        public ActionResult ProductList(string item, int sayfa = 1)
         {
-            return View(pRep.GetActives());
+            ViewBag.kategori = item;
+            ViewBag.kategoriListesi = cRep.GetActives();
+            if (item == null)
+            {
+                var degerler = pRep.GetActives().ToPagedList(sayfa, 10);
+                return View(degerler);
+
+            }
+            else
+            {
+                // sorun category sını belırledıgımız ıstedıgımız urunlerı getıremıyoruz
+                //productın ıcınden cekmelıyız
+                return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToPagedList(sayfa, 10));
+
+                //return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToList().ToPagedList(sayfa, 10));
+            }
+        }
+        public ActionResult ProductDetail(int item)
+        {
+            if (pRep.Any(x => x.ID == item))
+            {
+                Product bizimurun = pRep.GetByID(item);
+                using (HttpClient client = new HttpClient())
+                {
+                    
+
+
+                    //http://localhost:61379/api/Product/GetProducts
+                    //http://localhost:61379/
+                    client.BaseAddress = new Uri("http://localhost:61379/api/");
+                    //var postTask = client.PostAsJsonAsync("Product/GetProducts", item);
+                    var getTask = client.GetAsync("Product/GetProducts");
+                    var message = getTask.Result.Content.ReadAsAsync<List<ProductVM>>();
+
+                    List<ProductVM> digerfirma = message.Result as List<ProductVM>;
+
+                    if (digerfirma.Any(x => x.ProductName == bizimurun.ProductName))
+                    {
+                        ProductVM adamınurunu = digerfirma.Where(x => x.ProductName == bizimurun.ProductName).Single();
+                        TempData["karsılastırma"] = "Eşleşen ürünler vardır";
+                        ViewData.Add("adaminurunu", adamınurunu);
+
+                    }
+                    
+                }
+                return View(bizimurun);
+            }
+            
+            TempData["karsılastırma"] = "Eşleşen ürünler yoktur";
+            return RedirectToAction("ProductList");
         }
 
         public ActionResult SepeteAt(int id)
@@ -89,7 +142,10 @@ namespace Project.MVCUI.Controllers
 
                 var postTask = client.PostAsJsonAsync("Payment/ReceivePayment", item2);
 
+
+
                 HttpResponseMessage sonuc = postTask.Result;
+
 
                 if (sonuc.IsSuccessStatusCode)
                 {
@@ -99,6 +155,8 @@ namespace Project.MVCUI.Controllers
                 {
                     result = false;
                 }
+
+
             }
 
             if (result)
@@ -139,6 +197,9 @@ namespace Project.MVCUI.Controllers
                     kargo.Mahalle = item.Town;
                     kargo.Telefon = item.Phone;
 
+
+
+
                     var postTask = client.PostAsJsonAsync("Home/KargoOlustur", kargo);
 
                     HttpResponseMessage sonuc = postTask.Result;
@@ -146,12 +207,19 @@ namespace Project.MVCUI.Controllers
                     if (sonuc.IsSuccessStatusCode)
                     {
                         result2 = true;
+
                     }
                     else
                     {
                         result2 = false;
+
                     }
                 }
+
+
+
+
+
             }
             else
             {
