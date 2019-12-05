@@ -1,10 +1,12 @@
-﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
+﻿using PagedList;
+using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.MODEL.Entities;
 using Project.MVCUI.Filters;
 using Project.MVCUI.Models;
 using Project.MVCUI.Models.VMClasses;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -12,15 +14,17 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
-    [ActFilter, ResFilter]
+    //[ActFilter, ResFilter]
     public class MemberController : Controller
     {
         ProductRepository pRep;
         OrderRepository oRep;
         OrderDetailRepository odRep;
         CategoryRepository cRep;
+        ProductCategoryRepository pcRep;
         public MemberController()
         {
+            pcRep = new ProductCategoryRepository();
             pRep = new ProductRepository();
             oRep = new OrderRepository();
             odRep = new OrderDetailRepository();
@@ -41,7 +45,7 @@ namespace Project.MVCUI.Controllers
             {
                 // sorun category sını belırledıgımız ıstedıgımız urunlerı getıremıyoruz
                 //productın ıcınden cekmelıyız
-                return View(pRep.Where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToPagedList(sayfa, 10));
+                return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToPagedList(sayfa, 10));
 
                 //return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToList().ToPagedList(sayfa, 10));
             }
@@ -125,7 +129,7 @@ namespace Project.MVCUI.Controllers
             TempData["message"] = "Sepetinizde ürün bulunmamaktadır";
             return RedirectToAction("ProductList");
         }
-        
+
         public ActionResult SiparisiOnayla()
         {
             // if (Session["member"] != null)
@@ -142,7 +146,7 @@ namespace Project.MVCUI.Controllers
         {
             bool result = false;
             bool result2 = false;
-           
+
             using (HttpClient client = new HttpClient())
             {
 
@@ -156,11 +160,11 @@ namespace Project.MVCUI.Controllers
 
                 var postTask = client.PostAsJsonAsync("Payment/ReceivePayment", item2);
 
-               
+
 
                 HttpResponseMessage sonuc = postTask.Result;
 
-                
+
                 if (sonuc.IsSuccessStatusCode)
                 {
                     result = true;
@@ -169,7 +173,7 @@ namespace Project.MVCUI.Controllers
                 {
                     result = false;
                 }
-                
+
 
             }
 
@@ -189,7 +193,7 @@ namespace Project.MVCUI.Controllers
                     od.TotalPrice = urun.SubTotal;
                     od.Amount = urun.Amount;
                     od.PaymentDate = DateTime.Now;
-                    
+
                     odRep.Add(od);
 
                 }
@@ -204,7 +208,7 @@ namespace Project.MVCUI.Controllers
                     client.BaseAddress = new Uri("https://localhost:44333/api/");
 
                     kargo.Adi = (Session["member"] as AppUser).Profile.FirstName;
-                    kargo.Soyadi= (Session["member"] as AppUser).Profile.LastName;
+                    kargo.Soyadi = (Session["member"] as AppUser).Profile.LastName;
                     kargo.TCKimlikNumarası = item.TC;
                     kargo.Adres = item.Address;
                     kargo.Mail = (Session["member"] as AppUser).Email;
@@ -212,7 +216,7 @@ namespace Project.MVCUI.Controllers
                     kargo.Ilce = item.District;
                     kargo.Mahalle = item.Town;
                     kargo.Telefon = item.Phone;
-                    
+
 
 
 
@@ -226,22 +230,22 @@ namespace Project.MVCUI.Controllers
                     if (sonuc.IsSuccessStatusCode)
                     {
                         result2 = true;
-                       
+
                     }
                     else
                     {
                         result2 = false;
-                        
+
                     }
 
 
 
 
                 }
-                
 
-                
-                
+
+
+
 
             }
 
