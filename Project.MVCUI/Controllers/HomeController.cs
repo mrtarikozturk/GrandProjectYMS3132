@@ -93,6 +93,7 @@ namespace Project.MVCUI.Controllers
             if (arep.Any(x => x.UserName == item.UserName && DantexCrypt.DeCrypt(x.Password) == item.Password && x.Role == UserRole.Member && x.IsActive == true) == true)
             {
                 Session.Add("member", arep.FirstOrDefault(x => x.UserName == item.UserName && DantexCrypt.DeCrypt(x.Password) == item.Password && x.Role == UserRole.Member && x.IsActive == true));
+
             }
             ViewBag.Hatali = "Hatalı Giriş!";
             return View();
