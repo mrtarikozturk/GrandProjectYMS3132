@@ -125,6 +125,7 @@ namespace Project.MVCUI.Controllers
 
                 using (HttpClient client = new HttpClient())
                 {
+                    //furkan denedi
                     KargoVM kargo = new KargoVM();
 
                     client.BaseAddress = new Uri("https://localhost:44333/api/");
