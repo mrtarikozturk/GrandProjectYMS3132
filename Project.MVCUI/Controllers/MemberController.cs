@@ -3,6 +3,7 @@ using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.MODEL.Entities;
 using Project.MVCUI.AuthenticationClasses;
 using Project.MVCUI.Filters;
+using Project.MVCUI.Models;
 using Project.MVCUI.Models.VMClasses;
 using System;
 using System.Collections.Generic;
