@@ -36,23 +36,23 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
 
         public List<T> GetActives()
         {
-            return where(x => x.Status != DataStatus.Deleted);
+            return Where(x => x.Status != DataStatus.Deleted);
         }
 
         public List<T> GetUpdates()
         {
-            return where(x => x.Status == DataStatus.Updated);
+            return Where(x => x.Status == DataStatus.Updated);
         }
 
         public List<T> GetPassive()
         {
-            return where(x => x.Status == DataStatus.Deleted);
+            return Where(x => x.Status == DataStatus.Deleted);
         }
 
 
         //Ekeleme, Silme, Güncelleme Metotları
 
-        public void Add(T item)
+        public virtual void Add(T item)
         {
             db.Set<T>().Add(item);
             Save();
@@ -85,15 +85,10 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
 
         public T GetByID(int id)
         {
-            #region Açıklama
-            //Burası önemli. Find() metodu ile id üzerinden arama yapılırsa veri silinmiş olsa dahi getirir. Çünkü biz veriyi gerçekten silmiyoruz. Silindi olarak işaretliyoruz. Bir nevi görünmez yapıyoruz. Dolayısıyla burada buna dikkat etmezsek ise veri tekrar görünür olur. 
-            #endregion
-
-            //return db.Set<T>().FirstOrDefault(x => x.ID == id && x.Status != DataStatus.Deleted);
             return db.Set<T>().Find(id);
         }
 
-        public List<T> where(Expression<Func<T, bool>> exp)
+        public List<T> Where(Expression<Func<T, bool>> exp)
         {
             return db.Set<T>().Where(exp).ToList();
         }

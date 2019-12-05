@@ -2,6 +2,7 @@
 using Project.COMMON.CommonTools;
 using Project.MODEL.Entities;
 using Project.MODEL.Enums;
+using Project.MVCUI.AuthenticationClasses;
 using Project.MVCUI.Filters;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
-    [ActFilter, ResFilter]
+    [ActFilter, ResFilter,MemberAuthentication]
     public class HomeController : Controller
     {
         #region Açıklama
@@ -22,18 +23,15 @@ namespace Project.MVCUI.Controllers
         #endregion
 
         AppUserRepository arep;
-        
+
         AppUserDetailRepository adrep;
 
-       
         public HomeController()
         {
-            
             arep = new AppUserRepository();
+
             adrep = new AppUserDetailRepository();
         }
-
-
 
         public ActionResult Register()
         {
@@ -43,7 +41,12 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult Register([Bind(Prefix = "item1")]AppUser item, [Bind(Prefix = "item2")]AppUserDetail item2)
         {
-            arep.CheckCredentials(item.UserName, item.Email, out bool varmi);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            string mesaj = arep.CheckCredentials(item.UserName, item.Email, out bool varmi);
 
             if (varmi == false)
             {
@@ -59,7 +62,7 @@ namespace Project.MVCUI.Controllers
                 return View();
             }
 
-            ViewBag.ZatenVar = "Hesap Kullanılmaktadır.";
+            ViewBag.ZatenVar = mesaj;
 
             return View();
         }
@@ -74,8 +77,6 @@ namespace Project.MVCUI.Controllers
                 arep.Update(kullanici);
                 TempData.Add("HesapAktif", $"{kullanici.UserName} Hesabınız Aktif Edildi");
                 return RedirectToAction("Login");
-
-
             }
             ViewBag.mailonay = "Doğrulama Yapılamadı";
             return RedirectToAction("Register");
@@ -89,12 +90,21 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult Login(AppUser item)
         {
-            if (arep.Any(x => x.UserName == item.UserName && x.Password == item.Password && x.Role == UserRole.Member && x.IsActive == true) == true)
+            if (arep.Any(x => x.UserName == item.UserName && DantexCrypt.DeCrypt(x.Password) == item.Password && x.Role == UserRole.Member && x.IsActive == true) == true)
             {
-                Session.Add("member", arep.FirstOrDefault(x => x.UserName == item.UserName && x.Password == item.Password && x.Role==UserRole.Member && x.IsActive==true));
+                Session.Add("member", arep.FirstOrDefault(x => x.UserName == item.UserName && DantexCrypt.DeCrypt(x.Password) == item.Password && x.Role == UserRole.Member && x.IsActive == true));
             }
             ViewBag.Hatali = "Hatalı Giriş!";
             return View();
+        }
+
+        public ActionResult LogOut()
+        {
+            if (Session["member"] != null)
+            {
+                Session.Remove("member");
+            }
+            return RedirectToAction("Login");
         }
     }
 }

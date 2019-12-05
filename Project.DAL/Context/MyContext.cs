@@ -29,16 +29,6 @@ namespace Project.DAL.Context
             modelBuilder.Configurations.Add(new ProductFeatureMap());
             modelBuilder.Configurations.Add(new ProductMap());
 
-            modelBuilder.Entity<AppUser>().ToTable("Kullanicilar");
-            modelBuilder.Entity<AppUserDetail>().ToTable("KullaniciDetayilari");
-            modelBuilder.Entity<Category>().ToTable("Kategoriler");
-            modelBuilder.Entity<Feature>().ToTable("Ozellikler");
-            modelBuilder.Entity<Order>().ToTable("Siparisler");
-            modelBuilder.Entity<OrderDetail>().ToTable("SiparisDetaylari");
-            modelBuilder.Entity<Product>().ToTable("Urunler");
-            modelBuilder.Entity<ProductCategory>().ToTable("UrunlerinKategorileri");
-            modelBuilder.Entity<ProductFeature>().ToTable("UrunlerinOzellikleri");
-
         }
 
       

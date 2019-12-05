@@ -1,4 +1,5 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.BaseRep;
+using Project.COMMON.CommonTools;
 using Project.MODEL.Entities;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,12 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
             }
             varMi = false;
             return "Kullanici Eklendi";
+        }
+
+        public override void Add(AppUser item)
+        {
+            item.Password = DantexCrypt.Crypt(item.Password);
+            base.Add(item);
         }
     }
 }

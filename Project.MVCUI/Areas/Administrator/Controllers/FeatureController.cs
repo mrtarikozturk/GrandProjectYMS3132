@@ -1,5 +1,6 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.MODEL.Entities;
+using Project.MVCUI.AuthenticationClasses;
 using Project.MVCUI.Filters;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Administrator.Controllers
 {
-    [ActFilter, ResFilter]
+    [ActFilter, ResFilter, AdminAuthentication]
     public class FeatureController : Controller
     {
         FeatureRepository frep;
@@ -32,6 +33,11 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult Add(Feature item)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             if (item != null)
             {
                 if (frep.Any(x => x.FeatureName == item.FeatureName && x.Description == item.Description && x.Status != MODEL.Enums.DataStatus.Deleted))
@@ -49,17 +55,23 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
         public ActionResult Update(int id)
         {
             Feature f = frep.GetByID(id);
+
             if (f != null)
             {
                 return View(f);
             }
-            ViewBag.Hata = "Oluştu oluştu.";
+            ViewBag.Hata = "Hata oluştu.";
             return View();
         }
 
         [HttpPost]
         public ActionResult Update(Feature item)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             if (item != null)
             {
                 frep.Update(item);

@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace Project.MAP.Options
 {
-    public class ProductFeatureMap: BaseMap<ProductFeature>
+    public class ProductFeatureMap : BaseMap<ProductFeature>
     {
         public ProductFeatureMap()
         {
-            Property(x => x.Value).HasColumnName("Degeri");
-
             Ignore(x => x.ID);
+
             HasKey(x => new { x.ProductID, x.FeatureID });
+
+            ToTable("UrunlerinOzellikleri");
+
+            Property(x => x.Value).HasColumnName("Degeri");
         }
     }
 }

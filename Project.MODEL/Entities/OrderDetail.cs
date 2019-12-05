@@ -11,14 +11,19 @@ namespace Project.MODEL.Entities
     {
     
         public short Amount { get; set; }
+
         public decimal? TotalPrice { get; set; }
+
         public DateTime? PaymentDate { get; set; }
+
         public OrderStatus OrderStatus{ get; set; }
+
         public PackingStatus PackingStatus { get; set; }
+
         public PaymentOption PaymentOption { get; set; }
-
-
+        
         public int ProductID { get; set; }
+
         public int OrderID { get; set; }
 
         // Relational Properties

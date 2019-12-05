@@ -34,7 +34,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.IntRep
 
         //Sorgu Metotları
 
-        List<T> where(Expression<Func<T, bool>> exp);
+        List<T> Where(Expression<Func<T, bool>> exp);
 
         bool Any(Expression<Func<T, bool>> exp);
 

@@ -1,4 +1,6 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
+using Project.MODEL.Entities;
+using Project.MVCUI.AuthenticationClasses;
 using Project.MVCUI.Filters;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Administrator.Controllers
 {
-    [ActFilter, ResFilter]
+    [ActFilter, ResFilter, AdminAuthentication]
     public class OrderController : Controller
     {
         #region Açıklama
@@ -31,10 +33,29 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
 
             odrep = new OrderDetailRepository();
         }
-        
+
         public ActionResult List()
         {
-            return View(orep.GetActives());
+            return View(Tuple.Create(orep.GetActives(), odrep.GetActives()));
+        }
+
+        public ActionResult Update(int id)
+        {
+            return View(Tuple.Create(orep.GetByID(id), odrep.FirstOrDefault(x => x.OrderID == id)));
+        }
+
+        public ActionResult Update([Bind(Prefix = "item1")]Order order, [Bind(Prefix = "item2")]OrderDetail od)
+        {
+            orep.Update(order);
+            odrep.Update(od);
+            return RedirectToAction("List");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Order order = orep.GetByID(id);
+            orep.Delete(order);
+            return RedirectToAction("List");
         }
     }
 }
