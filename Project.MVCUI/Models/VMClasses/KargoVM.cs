@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Project.MVCUI.Models
+namespace Project.MVCUI.Models.VMClasses
 {
     public class KargoVM
     {

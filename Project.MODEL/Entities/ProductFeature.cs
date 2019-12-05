@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace Project.MODEL.Entities
 
         public int FeatureID { get; set; }
 
+        [DisplayName("Özellik Değeri"), DataType(DataType.Text)]
         public string Value { get; set; }
 
         // Relational Properties

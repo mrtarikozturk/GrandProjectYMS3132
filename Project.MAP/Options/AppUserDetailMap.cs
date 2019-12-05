@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace Project.MAP.Options
 {
-  public  class AppUserDetailMap: BaseMap<AppUserDetail>
+    public class AppUserDetailMap : BaseMap<AppUserDetail>
     {
         public AppUserDetailMap()
         {
+            ToTable("KullaniciDetayilari");
+
             Property(x => x.FirstName).HasColumnName("Adi");
+
             Property(x => x.LastName).HasColumnName("SoyAdi");
+
             Property(x => x.Address).HasColumnName("Adresi");
         }
     }

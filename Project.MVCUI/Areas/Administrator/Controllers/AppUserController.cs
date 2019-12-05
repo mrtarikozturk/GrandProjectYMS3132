@@ -1,5 +1,8 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
+using Project.COMMON.CommonTools;
 using Project.MODEL.Entities;
+using Project.MODEL.Enums;
+using Project.MVCUI.AuthenticationClasses;
 using Project.MVCUI.Filters;
 using System;
 using System.Collections.Generic;
@@ -9,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Administrator.Controllers
 {
-    [ActFilter, ResFilter]
+    [ActFilter, ResFilter, AdminAuthentication]
     public class AppUserController : Controller //Tamamlandı
     {
         #region Açıklama
@@ -22,6 +25,13 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
         AppUserRepository arep;
 
         AppUserDetailRepository adrep;
+
+        public AppUserController()
+        {
+            arep = new AppUserRepository();
+
+            adrep = new AppUserDetailRepository();
+        }
 
         public ActionResult List()
         {
@@ -36,13 +46,20 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult Add([Bind(Prefix = "item1")]AppUser item, [Bind(Prefix = "item2")]AppUserDetail item2)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }   //Kullanıcı tarayıcının JS kapatıp giriş yapmak isteyebilir. 
+
             if (item != null && item2 != null)
             {
-                if (arep.Any(x => x.UserName != item.UserName && x.Password != item.Password && x.Email != item.Email))
+                if (arep.Any(x => x.UserName != item.UserName && DantexCrypt.DeCrypt(x.Password) != item.Password && x.Email != item.Email))
                 {
+                    item.Role = UserRole.Admin;
                     arep.Add(item);
                     item2.ID = item.ID;
                     adrep.Add(item2);
+                    MailSender.Send(item.Email, body: $"{"http://localhost:60442/Home/RegisterOnay/"}{item.ActivationCode}", subject: "Doğrulama Kodu");
                     return View("List");
                 }
                 ViewBag.ZatenVar = "Böyle bir kullanıcı zaten var.";
@@ -54,17 +71,14 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
 
         public ActionResult Update(int id)
         {
-            #region Açıklama
-            //GetById burada veritabanındaki tüm kayıtlardan aktif-pasif demeden getirmektedir. Dolayısıyla silinen veriler de gelebilir bu durumda. Buraya bir daha bakacağız!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!GetById sorgusu sadece aktiflerde sordu yapacak şekilde düzeltildi. 
-            #endregion
-
-            AppUser a = arep.GetByID(id);
-            AppUserDetail ad = adrep.GetByID(id);
+            AppUser a = arep.FirstOrDefault(x => x.ID == id && x.Status != DataStatus.Deleted);
+            AppUserDetail ad = adrep.FirstOrDefault(x => x.ID == id && x.Status != DataStatus.Deleted);
 
             if (a != null) //Veri başka bir admin tarafından silinmiş olabilir. Bu durumda null gelme olasılığı bulunmakatadır.
             {
                 return View(Tuple.Create(a, ad));
             }
+
             ViewBag.Bulunamadı = "Veri güncellenmek istenirken hata ile karşılaşıldı.";
             return View();
         }
@@ -72,6 +86,11 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult Update([Bind(Prefix = "item1")]AppUser item, [Bind(Prefix = "item2")]AppUserDetail item2)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             if (item != null && item2 != null)
             {
                 arep.Update(item);
@@ -99,7 +118,7 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
             //return RedirectToAction("List"); 
             #endregion
 
-            if (a!=null)
+            if (a != null)
             {
                 arep.Delete(a);
             }
