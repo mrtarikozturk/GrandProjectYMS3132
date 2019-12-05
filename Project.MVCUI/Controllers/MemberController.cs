@@ -164,7 +164,7 @@ namespace Project.MVCUI.Controllers
             {
                 //AppUser kullanici = Session["member"] as AppUser;
                 item.AppUserID = (Session["member"] as AppUser).ID; //Order'in kim tarafından sipariş edildigini belirlersiniz
-                oRep.Add(item); //save edildiginde Order nesnesinin ID'si üretilir.
+                oRep.Add(item); 
 
                 Cart sepet = Session["scart"] as Cart;
 
