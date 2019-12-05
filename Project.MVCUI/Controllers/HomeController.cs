@@ -72,8 +72,8 @@ namespace Project.MVCUI.Controllers
             {
                 kullanici.IsActive = true;
                 arep.Update(kullanici);
-                TempData.Add("HesapAktif", $"{kullanici.UserName} Hesabınız Aktif Edildi");
-                return RedirectToAction("Login");
+                TempData.Add("HesapAktif", $"{kullanici.UserName} Hesabınız Zaten Aktif");
+                return RedirectToAction("Login"); // todo: sonradan eklendi
 
 
             }
@@ -92,9 +92,13 @@ namespace Project.MVCUI.Controllers
             if (arep.Any(x => x.UserName == item.UserName && x.Password == item.Password && x.Role == UserRole.Member && x.IsActive == true) == true)
             {
                 Session.Add("member", arep.FirstOrDefault(x => x.UserName == item.UserName && x.Password == item.Password && x.Role==UserRole.Member && x.IsActive==true));
+                return RedirectToAction("ProductList", "Member");  // todo: sonradan eklendi
             }
-            ViewBag.Hatali = "Hatalı Giriş!";
-            return View();
+            else
+            {
+                ViewBag.Hatali = "Kullanıcı Bilgileri Hatalı. Kayıtlı Değilseniz: ";
+                return View();
+            }
         }
     }
 }
