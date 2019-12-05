@@ -2013,7 +2013,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Member\ProductList.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2030,7 +2031,7 @@
     <Folder Include="Areas\Administrator\Views\Home\" />
     <Folder Include="Areas\Administrator\Views\Order\" />
     <Folder Include="Pictures\" />
-    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.BLL\Project.BLL.csproj">
