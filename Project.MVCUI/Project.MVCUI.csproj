@@ -1833,15 +1833,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\VMClasses\Cart.cs" />
-    <Compile Include="Models\VMClasses\CartItem.cs" />
     <Compile Include="Models\Enums\Durum.cs" />
     <Compile Include="Models\Enums\Keyword.cs" />
-    <Compile Include="Models\HareketVM.cs" />
-    <Compile Include="Models\KargoVM.cs" />
-    <Compile Include="Models\LogVM.cs" />
-    <Compile Include="Models\PaymentVM.cs" />
-    <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\VMClasses\ProductVM.cs" />
+    <Compile Include="Models\VMClasses\Cart.cs" />
+    <Compile Include="Models\VMClasses\CartItem.cs" />
+    <Compile Include="Models\VMClasses\HareketVM.cs" />
+    <Compile Include="Models\VMClasses\KargoVM.cs" />
+    <Compile Include="Models\VMClasses\LogVM.cs" />
+    <Compile Include="Models\VMClasses\PaymentVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2031,7 +2031,6 @@
     <Folder Include="Areas\Administrator\Views\Order\" />
     <Folder Include="Pictures\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.BLL\Project.BLL.csproj">
