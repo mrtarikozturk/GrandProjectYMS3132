@@ -41,47 +41,67 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult Register([Bind(Prefix = "item1")]AppUser item, [Bind(Prefix = "item2")]AppUserDetail item2)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+
+                string mesaj = arep.CheckCredentials(item.UserName, item.Email, out bool varmi);
+
+                if (varmi == false)
+                {
+                    item.Role = UserRole.Member;
+                    arep.Add(item);
+                    item2.AppUser = item;
+                    adrep.Add(item2);
+
+                    MailSender.Send(item.Email, body: $"{"https://localhost:44377/Home/RegisterOnay/"}{item.ActivationCode}", subject: "Doğrulama Kodu");
+
+                    ViewBag.mailOnay = "Mail adresinize gelen aktivasyon linkini tıklayın.";
+
+                    return View();
+                }
+
+                ViewBag.ZatenVar = mesaj;
+
+                return View();
+            }
+            catch (Exception)
+            {
+                ViewBag.Hata = "Kayıt Sırasında Hata Oluştu Lütfen Tekrar Deneyiniz";
                 return View();
             }
 
-            string mesaj = arep.CheckCredentials(item.UserName, item.Email, out bool varmi);
-
-            if (varmi == false)
-            {
-                item.Role = UserRole.Member;
-                arep.Add(item);
-                item2.AppUser = item;
-                adrep.Add(item2);
-
-                MailSender.Send(item.Email, body: $"{"https://localhost:44377/Home/RegisterOnay/"}{item.ActivationCode}", subject: "Doğrulama Kodu");
-
-                ViewBag.mailOnay = "Mail adresinize gelen aktivasyon linkini tıklayın.";
-
-                return View();
-            }
-
-            ViewBag.ZatenVar = mesaj;
-
-            return View();
         }
 
         public ActionResult RegisterOnay(Guid id)
         {
-            AppUser kullanici = arep.FirstOrDefault(x => x.ActivationCode == id);
-
-            if (kullanici != null)
+            try
             {
-                kullanici.IsActive = true;
-                arep.Update(kullanici);
-                TempData.Add("HesapAktif", $"{kullanici.UserName} Hesabınız Zaten Aktif");
-                return RedirectToAction("Login"); // todo: sonradan eklendi
+                AppUser kullanici = arep.FirstOrDefault(x => x.ActivationCode == id);
 
+                if (kullanici != null)
+                {
+                    kullanici.IsActive = true;
+                    arep.Update(kullanici);
+                    TempData.Add("HesapAktif", $"{kullanici.UserName} Hesabınız Zaten Aktif");
+                    return RedirectToAction("Login"); // todo: sonradan eklendi
+
+
+                }
+                ViewBag.mailonay = "Doğrulama Yapılamadı";
+                return RedirectToAction("Register");
+            }
+            catch (Exception)
+            {
+
+                ViewBag.mailonay = "Doğrulama Yapılamadı";
+                return RedirectToAction("Register");
 
             }
-            ViewBag.mailonay = "Doğrulama Yapılamadı";
-            return RedirectToAction("Register");
+
         }   //Üye onay işlemleri
 
         public ActionResult Login()
@@ -92,16 +112,39 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult Login(AppUser item)
         {
-            if (arep.KontrolEt(item.UserName,item.Password) != null )
+            #region EskiAlgoritma
+            //if (arep.Any(x=>x.UserName == item.UserName && x.Password==item.Password && x.IsActive == true && x.Role == UserRole.Member))
+            //{
+            //    Session.Add("member",arep.Where(x => x.UserName == item.UserName && x.Password == item.Password && x.IsActive == true && x.Role == UserRole.Member));
+            //    return RedirectToAction("ProductList", "Member");  // todo: sonradan eklendi
+            //}
+
+            // Furkan Test Islemlerı Test1 :)
+            #endregion
+
+            try
             {
-                Session.Add("member",arep.KontrolEt(item.UserName,item.Password));
-                return RedirectToAction("ProductList", "Member");  // todo: sonradan eklendi
+                foreach (AppUser item2 in arep.GetAll())
+                {
+                    string cozulmusSifre = DantexCrypt.DeCrypt(item2.Password);
+                    if (arep.Any(x => x.UserName == item.UserName && cozulmusSifre == item.Password && x.IsActive == true && x.Role == UserRole.Member) == true)
+                    {
+
+                        Session.Add("member", arep.Where(x => x.UserName == item.UserName && cozulmusSifre == item.Password && x.IsActive == true && x.Role == UserRole.Member));
+                        return RedirectToAction("ProductList", "Member");
+                    }
+
+                }
+
+                ViewBag.Hatali = "Kullanıcı Bilgileri Hatalı. Kayıtlı Değilseniz: ";
+                return View();
             }
-            else
+            catch (Exception)
             {
                 ViewBag.Hatali = "Kullanıcı Bilgileri Hatalı. Kayıtlı Değilseniz: ";
                 return View();
             }
+
         }
     }
 }

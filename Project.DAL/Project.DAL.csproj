@@ -61,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Project.COMMON\Project.COMMON.csproj">
+      <Project>{3ED55F37-52C1-43FD-8069-CF56D7BCDF7B}</Project>
+      <Name>Project.COMMON</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.MAP\Project.MAP.csproj">
       <Project>{5eee99ad-2524-4189-b609-ea1858fa24e3}</Project>
       <Name>Project.MAP</Name>

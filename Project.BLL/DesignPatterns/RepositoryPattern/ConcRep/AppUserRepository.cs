@@ -36,20 +36,20 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
             base.Add(item);
         }
 
-        public AppUser KontrolEt(string kullaniciadi,string sifre)
-        {
+        //public AppUser KontrolEt(string kullaniciadi,string sifre)
+        //{
 
-            foreach (AppUser item in db.AppUsers.Where(x=>x.IsActive == true))
-            {
-                string veritabaniSifre = DantexCrypt.DeCrypt(item.Password);
-                if (Any(x=>x.UserName == kullaniciadi && veritabaniSifre == sifre && x.Role == UserRole.Member && x.IsActive == true))
-                {
-                    return Where(x => x.UserName == kullaniciadi && veritabaniSifre == sifre && x.Role == UserRole.Member && x.IsActive == true).Single();
-                }
+        //    foreach (AppUser item in db.AppUsers.Where(x=>x.IsActive == true))
+        //    {
+        //        string veritabaniSifre = DantexCrypt.DeCrypt(item.Password);
+        //        if (Any(x=>x.UserName == kullaniciadi && veritabaniSifre == sifre && x.Role == UserRole.Member && x.IsActive == true))
+        //        {
+        //            return Where(x => x.UserName == kullaniciadi && veritabaniSifre == sifre && x.Role == UserRole.Member && x.IsActive == true).Single();
+        //        }
                 
 
-            }
-            return null;
-        }
+        //    }
+        //    return null;
+        //}
     }
 }

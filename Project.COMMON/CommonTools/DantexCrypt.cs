@@ -11,30 +11,39 @@ namespace Project.COMMON.CommonTools
     {
         public static string Crypt(string a)
         {
-            Random rnd = new Random();
-            char[] charArray = { '*', '_', '?' };
-            string hashedCode = "";
-
-            foreach (char item in a)
+            try
             {
-                int tempInteger;
-                switch (rnd.Next(1, 4))
+                Random rnd = new Random();
+                char[] charArray = { '*', '_', '?' };
+                string hashedCode = "";
+
+                foreach (char item in a)
                 {
-                    case 1:
-                        tempInteger = (Convert.ToInt32(item) + 1) * 2;
-                        hashedCode += $"{tempInteger.ToString()}{charArray[0]}";
-                        break;
-                    case 2:
-                        tempInteger = (Convert.ToInt32(item) + 2) * 3;
-                        hashedCode += $"{tempInteger.ToString()}{charArray[1]}";
-                        break;
-                    case 3:
-                        tempInteger = (Convert.ToInt32(item) + 3) * 4;
-                        hashedCode += $"{tempInteger.ToString()}{charArray[2]}";
-                        break;
+                    int tempInteger;
+                    switch (rnd.Next(1, 4))
+                    {
+                        case 1:
+                            tempInteger = (Convert.ToInt32(item) + 1) * 2;
+                            hashedCode += $"{tempInteger.ToString()}{charArray[0]}";
+                            break;
+                        case 2:
+                            tempInteger = (Convert.ToInt32(item) + 2) * 3;
+                            hashedCode += $"{tempInteger.ToString()}{charArray[1]}";
+                            break;
+                        case 3:
+                            tempInteger = (Convert.ToInt32(item) + 3) * 4;
+                            hashedCode += $"{tempInteger.ToString()}{charArray[2]}";
+                            break;
+                    }
                 }
+                return hashedCode;
             }
-            return hashedCode;
+            catch (Exception)
+            {
+
+                return null;
+            }
+            
         }
 
         public static string DeCrypt(string a)

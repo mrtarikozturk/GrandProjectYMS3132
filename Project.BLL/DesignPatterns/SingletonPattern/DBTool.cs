@@ -10,7 +10,7 @@ namespace Project.BLL.DesignPatterns.SingletonPattern
    public class DBTool
     {
 
-        DBTool() { }
+        private DBTool() { }
 
         static MyContext _dbInstance;
 

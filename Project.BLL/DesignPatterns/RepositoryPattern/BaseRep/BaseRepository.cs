@@ -14,7 +14,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
 {
     public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
-        protected MyContext db;
+        public MyContext db;
 
         public BaseRepository()
         {
@@ -96,6 +96,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
         public bool Any(Expression<Func<T, bool>> exp)
         {
             return db.Set<T>().Any(exp);
+            
         }
 
         public T FirstOrDefault(Expression<Func<T, bool>> exp)
