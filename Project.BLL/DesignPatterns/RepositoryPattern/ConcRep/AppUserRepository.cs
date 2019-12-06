@@ -1,6 +1,7 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.BaseRep;
 using Project.COMMON.CommonTools;
 using Project.MODEL.Entities;
+using Project.MODEL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,22 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
         {
             item.Password = DantexCrypt.Crypt(item.Password);
             base.Add(item);
+        }
+
+        public AppUser KontrolEt(string kullaniciadi,string sifre)
+        {
+
+            foreach (AppUser item in db.AppUsers.Where(x=>x.IsActive == true))
+            {
+                string veritabaniSifre = DantexCrypt.DeCrypt(item.Password);
+                if (Any(x=>x.UserName == kullaniciadi && veritabaniSifre == sifre && x.Role == UserRole.Member && x.IsActive == true))
+                {
+                    return Where(x => x.UserName == kullaniciadi && veritabaniSifre == sifre && x.Role == UserRole.Member && x.IsActive == true).Single();
+                }
+                
+
+            }
+            return null;
         }
     }
 }

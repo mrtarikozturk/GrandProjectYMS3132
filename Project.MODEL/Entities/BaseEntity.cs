@@ -17,7 +17,7 @@ namespace Project.MODEL.Entities
 
         public int ID { get; set; }
          
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
 

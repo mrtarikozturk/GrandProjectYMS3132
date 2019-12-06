@@ -19,9 +19,7 @@ namespace Project.MVCUI.Controllers
     public class MemberController : Controller
     {
         ProductRepository pRep;
-
         OrderRepository oRep;
-
         OrderDetailRepository odRep;
         CategoryRepository cRep;
         ProductCategoryRepository pcRep;
@@ -30,9 +28,7 @@ namespace Project.MVCUI.Controllers
             cRep = new CategoryRepository();
             pcRep = new ProductCategoryRepository();
             pRep = new ProductRepository();
-
             oRep = new OrderRepository();
-
             odRep = new OrderDetailRepository();
         }
         // GET: Member
@@ -42,7 +38,7 @@ namespace Project.MVCUI.Controllers
             ViewBag.kategoriListesi = cRep.GetActives();
             if (item == null)
             {
-                var degerler = pRep.GetActives().ToPagedList(sayfa, 10);
+                IPagedList degerler = pRep.GetActives().ToPagedList(sayfa, 10);
                 return View(degerler);
 
             }
@@ -50,7 +46,7 @@ namespace Project.MVCUI.Controllers
             {
                 // sorun category sını belırledıgımız ıstedıgımız urunlerı getıremıyoruz
                 //productın ıcınden cekmelıyız
-                return View(pRep.Where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToPagedList(sayfa, 10));
+                return View(pRep.KategoriyeGoreUrunGetir(item).ToPagedList(sayfa, 10));
 
                 //return View(pRep.where(x => x.Categories.FirstOrDefault().Category.CategoryName == item).ToList().ToPagedList(sayfa, 10));
             }
@@ -62,7 +58,7 @@ namespace Project.MVCUI.Controllers
                 Product bizimurun = pRep.GetByID(item);
                 using (HttpClient client = new HttpClient())
                 {
-                    
+
 
 
                     //http://localhost:61379/api/Product/GetProducts
@@ -81,11 +77,11 @@ namespace Project.MVCUI.Controllers
                         ViewData.Add("adaminurunu", adamınurunu);
 
                     }
-                    
+
                 }
                 return View(bizimurun);
             }
-            
+
             TempData["karsılastırma"] = "Eşleşen ürünler yoktur";
             return RedirectToAction("ProductList");
         }
@@ -165,7 +161,7 @@ namespace Project.MVCUI.Controllers
             {
                 //AppUser kullanici = Session["member"] as AppUser;
                 item.AppUserID = (Session["member"] as AppUser).ID; //Order'in kim tarafından sipariş edildigini belirlersiniz
-                oRep.Add(item); 
+                oRep.Add(item);
 
                 Cart sepet = Session["scart"] as Cart;
 

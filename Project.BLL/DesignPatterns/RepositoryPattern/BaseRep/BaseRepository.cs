@@ -88,7 +88,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
             return db.Set<T>().Find(id);
         }
 
-        public List<T> Where(Expression<Func<T, bool>> exp)
+        public virtual List<T> Where(Expression<Func<T, bool>> exp)
         {
             return db.Set<T>().Where(exp).ToList();
         }

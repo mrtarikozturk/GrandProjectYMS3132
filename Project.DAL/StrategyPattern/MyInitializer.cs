@@ -132,6 +132,7 @@ namespace Project.DAL.StrategyPattern
             #endregion
 
             Random rnd = new Random();
+            
 
             for (int i = 0; i < 5; i++)
             {
@@ -170,12 +171,11 @@ namespace Project.DAL.StrategyPattern
                     }
                     context.SaveChanges();
 
-
-                    for (int k = 0; k < 40; k++)
+                    for (int k = 0; k < 1; k++)
                     {
                         Feature f = new Feature();
                         f.FeatureName = new Commerce("tr").ProductMaterial();
-                        f.Description = new Lorem("tr").Sentence(50);
+                        f.Description = new Lorem("tr").Sentence(3);
                         context.Features.Add(f);
                         context.SaveChanges();
 
@@ -186,8 +186,8 @@ namespace Project.DAL.StrategyPattern
                         context.ProductFeatures.Add(pf);
                         context.SaveChanges();
                     }
-               
                 }
+                
 
             }       //Category eklendi.
                     //Product Eklendi.

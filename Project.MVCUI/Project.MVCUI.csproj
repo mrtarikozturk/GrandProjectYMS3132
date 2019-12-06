@@ -2015,6 +2015,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Member\ProductList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2031,7 +2032,6 @@
     <Folder Include="Areas\Administrator\Views\Home\" />
     <Folder Include="Areas\Administrator\Views\Order\" />
     <Folder Include="Pictures\" />
-    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.BLL\Project.BLL.csproj">

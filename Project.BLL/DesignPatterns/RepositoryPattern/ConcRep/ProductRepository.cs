@@ -10,5 +10,11 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
 {
     public class ProductRepository : BaseRepository<Product>
     {
+        public List<Product> KategoriyeGoreUrunGetir(string item)
+        {
+            
+           return db.Products.Where(x => x.Categories.FirstOrDefault().Category.CategoryName== item).ToList();
+
+        }
     }
 }

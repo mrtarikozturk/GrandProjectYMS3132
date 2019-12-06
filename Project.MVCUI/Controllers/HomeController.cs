@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Controllers
 {
-    [ActFilter, ResFilter,MemberAuthentication]
+    //[ActFilter, ResFilter,MemberAuthentication]
     public class HomeController : Controller
     {
         #region Açıklama
@@ -55,7 +55,7 @@ namespace Project.MVCUI.Controllers
                 item2.AppUser = item;
                 adrep.Add(item2);
 
-                MailSender.Send(item.Email, body: $"{"http://localhost:60442/Home/RegisterOnay/"}{item.ActivationCode}", subject: "Doğrulama Kodu");
+                MailSender.Send(item.Email, body: $"{"https://localhost:44377/Home/RegisterOnay/"}{item.ActivationCode}", subject: "Doğrulama Kodu");
 
                 ViewBag.mailOnay = "Mail adresinize gelen aktivasyon linkini tıklayın.";
 
@@ -92,9 +92,9 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult Login(AppUser item)
         {
-            if (arep.Any(x => x.UserName == item.UserName && DantexCrypt.DeCrypt(x.Password) == item.Password && x.Role == UserRole.Member && x.IsActive == true) == true)
+            if (arep.KontrolEt(item.UserName,item.Password) != null )
             {
-                Session.Add("member", arep.FirstOrDefault(x => x.UserName == item.UserName && x.Password == item.Password && x.Role==UserRole.Member && x.IsActive==true));
+                Session.Add("member",arep.KontrolEt(item.UserName,item.Password));
                 return RedirectToAction("ProductList", "Member");  // todo: sonradan eklendi
             }
             else
