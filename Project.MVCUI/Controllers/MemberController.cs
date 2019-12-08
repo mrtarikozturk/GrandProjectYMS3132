@@ -61,6 +61,21 @@ namespace Project.MVCUI.Controllers
             }
 
         }
+        public PartialViewResult Slider(decimal sayi1, decimal sayi2, int sayfa = 1)
+        {
+            //ViewBag.sayi1 = sayi1;
+            //ViewBag.sayi2 = sayi2;
+
+            return PartialView(pRep.Slider(sayi1, sayi2).ToPagedList(sayfa, 10));
+        }
+
+
+        [HttpGet]
+        public PartialViewResult Filtre(string item)
+
+        {
+            return PartialView("_Filtre", pRep.Where(x => x.ProductName.StartsWith(item)));
+        }
         public ActionResult ProductDetail(int item)
         {
             if (pRep.Any(x => x.ID == item))
@@ -70,9 +85,6 @@ namespace Project.MVCUI.Controllers
                 {
 
 
-
-                    //http://localhost:61379/api/Product/GetProducts
-                    //http://localhost:61379/
                     client.BaseAddress = new Uri("http://localhost:61379/api/");
                     //var postTask = client.PostAsJsonAsync("Product/GetProducts", item);
                     var getTask = client.GetAsync("Product/GetProducts");
@@ -85,6 +97,16 @@ namespace Project.MVCUI.Controllers
                         ProductVM adamınurunu = digerfirma.Where(x => x.ProductName == bizimurun.ProductName).Single();
                         TempData["karsılastırma"] = "Eşleşen ürünler vardır";
                         ViewData.Add("adaminurunu", adamınurunu);
+
+                        if (bizimurun.UnitPrice < adamınurunu.UnitPrice)
+                        {
+                            ViewBag.info = $"{adamınurunu.UnitPrice - bizimurun.UnitPrice} ₺ Kardasınız";
+
+                        }
+                        else
+                        {
+                            ViewBag.info2 = $"{adamınurunu.UnitPrice - bizimurun.UnitPrice} ₺ Zarardasınız";
+                        }
 
                     }
 
@@ -114,7 +136,7 @@ namespace Project.MVCUI.Controllers
 
                 Session["scart"] = c;
                 ViewBag.SepeteAtma = "Urun Sepete Atıldı";
-                return RedirectToAction("CartPage"); // todo:şimdilik cartpage e yönlendirdim. eskiden product list idi. product liste sepete git tuşu koyalım.
+                return RedirectToAction("ProductList"); 
             }
 
             catch (Exception)
@@ -201,8 +223,7 @@ namespace Project.MVCUI.Controllers
 
                 if (result)
                 {
-                    //AppUser kullanici = Session["member"] as AppUser;
-                    item.AppUserID = (Session["member"] as AppUser).ID; //Order'in kim tarafından sipariş edildigini belirlersiniz
+                    item.AppUserID = (Session["member"] as AppUser).ID;
                     oRep.Add(item);
 
                     Cart sepet = Session["scart"] as Cart;
@@ -244,6 +265,11 @@ namespace Project.MVCUI.Controllers
                         var postTask = client.PostAsJsonAsync("Home/KargoOlustur", kargo);
 
                         HttpResponseMessage sonuc = postTask.Result;
+
+                        var geriyedonen = sonuc.Content.ReadAsAsync<string>();
+
+                        string kargoyazisi = geriyedonen.Result;
+                        TempData["Kargo"] = kargoyazisi;
 
                         if (sonuc.IsSuccessStatusCode)
                         {

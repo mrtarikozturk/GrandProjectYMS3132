@@ -20,7 +20,7 @@ namespace Project.MODEL.Entities
         [Required, DisplayName("Kullanıcı Adı"), MaxLength(30), DataType(DataType.Text)]
         public string UserName { get; set; }
 
-        [Required, DisplayName("Şifre"), MaxLength(30), DataType(DataType.Password)]
+        [Required, DisplayName("Şifre"), DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required, DisplayName("E-Posta"), MaxLength(60), DataType(DataType.EmailAddress)]
