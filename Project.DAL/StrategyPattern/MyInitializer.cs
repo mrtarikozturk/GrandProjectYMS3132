@@ -135,7 +135,7 @@ namespace Project.DAL.StrategyPattern
             Random rnd = new Random();
             
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 15; i++)
             {
                 Category c = new Category();
 

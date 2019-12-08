@@ -46,7 +46,7 @@ namespace Project.MVCUI.Models.VMClasses
             _sepetim.Remove(id);
         }
 
-
+   
         public decimal? TotalPrice
         {
             get

@@ -30,6 +30,7 @@ namespace Project.MVCUI.Controllers
             pRep = new ProductRepository();
             oRep = new OrderRepository();
             odRep = new OrderDetailRepository();
+            ViewData.Add("kategoriler", cRep.GetActives());
         }
         // GET: Member
         public ActionResult ProductList(string item, int sayfa = 1)
@@ -113,7 +114,7 @@ namespace Project.MVCUI.Controllers
 
                 Session["scart"] = c;
                 ViewBag.SepeteAtma = "Urun Sepete Atıldı";
-                return RedirectToAction("ProductList");
+                return RedirectToAction("CartPage"); // todo:şimdilik cartpage e yönlendirdim. eskiden product list idi. product liste sepete git tuşu koyalım.
             }
 
             catch (Exception)
