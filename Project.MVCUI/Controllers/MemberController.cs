@@ -249,6 +249,8 @@ namespace Project.MVCUI.Controllers
                         {
                             result2 = true;
 
+                            ViewData.Add("orderbilgileri", item);
+
                         }
                         else
                         {
@@ -256,10 +258,6 @@ namespace Project.MVCUI.Controllers
 
                         }
                     }
-
-
-
-
 
                 }
                 else
@@ -280,6 +278,39 @@ namespace Project.MVCUI.Controllers
             }
 
 
+
+
+        }
+
+        [HttpGet]
+        public ActionResult Fatura()
+        {
+
+            try
+            {
+                if (Session["scart"] != null)
+                {
+                    Cart c = Session["scart"] as Cart;
+                    ViewBag.kullaniciad = (Session["member"] as AppUser).Profile.FirstName;
+                    ViewBag.soyad = (Session["member"] as AppUser).Profile.LastName;
+                    ViewBag.kullaniciAdres = (Session["member"] as AppUser).Profile.Address;
+                    
+
+                    return View(c);
+                }
+                else if (Session["member"] == null)
+                {
+                    TempData["UyeDegil"] = "Lutfen önce üye olun";
+                    return RedirectToAction("Register", "Home");
+                }
+                TempData["message"] = "Sepetinizde ürün bulunmamaktadır";
+                return RedirectToAction("ProductList");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("ProductList");
+            }
 
 
         }
@@ -310,9 +341,9 @@ namespace Project.MVCUI.Controllers
             catch (Exception)
             {
                 ViewBag.UrunSil = "Sepetten Urun Çıkartılamadı";
-                return RedirectToAction("CartPage","Member");
+                return RedirectToAction("CartPage", "Member");
             }
-            
+
         }
     }
 }
