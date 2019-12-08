@@ -3,7 +3,7 @@
 @model PagedList.IPagedList<Product>
 @{
     ViewBag.Title = "ProductList";
-  
+    
 }
 
 <link href="~/OuterTools/FlatAdmin/css/bootstrap.min.css" rel="stylesheet">
@@ -21,106 +21,53 @@
 
 <div class="row">
     <div class="col-md-3">
-        <section class="panel">
-            <div class="panel-body">
-                <input id="Filtre" type="text" placeholder="Keyword Search" class="form-control">
-            </div>
-        </section>
-        <section class="panel">
-            <header class="panel-heading">
-                Category
-            </header>
-            <div class="panel-body">
-                <ul class="nav prod-cat">
-                    @foreach (Category item2 in ViewBag.kategoriListesi)
-                    {
-                        <li> @Html.ActionLink(item2.CategoryName, "ProductList", new { item = item2.CategoryName }, new { @class = "icon-angle-right" })</li>
-                    }
-                </ul>
-            </div>
-        </section>
-        <section class="panel">
-            <header class="panel-heading">
-                Price Range
-            </header>
-            <div class="panel-body sliders">
-                <div id="slider-range" class="slider"></div>
-                <div class="slider-info">
-                    <span id="slider-range-amount"></span>
-
+        @*<section class="panel">
+                <div class="panel-body">
+                    <input id="Filtre" type="text" placeholder="Keyword Search" class="form-control">
                 </div>
-            </div>
-        </section>
-        <section class="panel">
-            <header class="panel-heading">
-                Best Seller
-            </header>
-            <div class="panel-body">
-                <div class="best-seller">
-                    <article class="media">
-                        <a class="pull-left thumb p-thumb">
-                            <img src="~/OuterTools/FlatAdmin/img/product1.jpg" />
+            </section>*@
 
-                        </a>
-                        <div class="media-body">
-                            <a href="#" class=" p-head">Item One Tittle</a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </article>
-                    <article class="media">
-                        <a class="pull-left thumb p-thumb">
-                            <img src="~/OuterTools/FlatAdmin/img/product2.png">
-                        </a>
-                        <div class="media-body">
-                            <a href="#" class=" p-head">Item Two Tittle</a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </article>
-                    <article class="media">
-                        <a class="pull-left thumb p-thumb">
-                            <img src="~/OuterTools/FlatAdmin/img/product3.png">
-                        </a>
-                        <div class="media-body">
-                            <a href="#" class=" p-head">Item Three Tittle</a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
+
+
     </div>
-    <div class="col-md-9">
+    <div class="col-md-12">
         <section class="panel">
             <div class="panel-body">
-                <div class="pro-sort">
-                    <label class="pro-lab">Sort By</label>
-                    <select class="styled">
-                        <option>Default Sorting</option>
-                        <option>Popularity</option>
-                        <option>Average Rating</option>
-                        <option>Newness</option>
-                        <option>Price Low to High</option>
-                        <option>Price High to Low</option>
-                    </select>
+
+                <div class="col-md-3">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Price Range
+                        </header>
+                        <div class="panel-body sliders">
+                            <div id="slider-range" class="slider"></div>
+                            <div class="slider-info">
+                                <span id="slider-range-amount"></span>
+
+                            </div>
+                            <br />
+                            <div class="panel-body">
+                                <input id="Filtre" type="text" placeholder="Ürün Arat" class="form-control">
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <div class="pro-sort">
-                    <label class="pro-lab">Show</label>
-                    <select class="styled">
-                        <option>Result Per Page</option>
-                        <option>2 Per Page</option>
-                        <option>4 Per Page</option>
-                        <option>6 Per Page</option>
-                        <option>8 Per Page</option>
-                        <option>10 Per Page</option>
-                    </select>
-                </div>
+
+
+
 
                 <div class="pull-right">
                     <ul class="pagination pagination-sm pro-page-list">
 
-                        @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("ProductList", new { item = ViewBag.kategori , sayfa }))
+                        @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("ProductList", new { item = ViewBag.kategori, sayfa }))
                     </ul>
+                    <br />
+                    @Html.ActionLink("Sepet Sayfası", "CartPage", "Member", new { @class = "btn btn-info" })
                 </div>
+                @*<div class="pull-right">
+                        @Html.ActionLink("Sepet Sayfası", "CartPage", "Member", new { @class = "btn btn-info" })
+
+                    </div>*@
             </div>
         </section>
 
@@ -131,7 +78,7 @@
             @foreach (Product item in Model)
             {
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <section class="panel">
                         <div class="pro-img-box">
                             <img src="@item.ImagePath" alt="" />
@@ -148,6 +95,7 @@
                             </h4>
                             <p class="price">$@item.UnitPrice</p>
                             <p> @Html.ActionLink("Ürün Detay", "ProductDetail", new { item = item.ID })</p>
+
                         </div>
                     </section>
                 </div>
@@ -157,6 +105,10 @@
 
 
         </div>
+
+
+
+
 
 
 
@@ -194,25 +146,96 @@
 
 </script>
 
+
+
 <script>
-    $(function () {
+     $(function () {
 
         $("#Filtre").keyup(function () {
 
             $("#Urunler").empty(); //Urunleri Temızlıyoruz!!!
 
             var filtre = $("#Filtre").val();
-
+    alert("gokhan")
             $.get("/Member/Filtre/?item=" + filtre + "", function (gelenVeri) {
 
                 $("#Urunler").html(gelenVeri);
             })
-
         })
-
-
-
     });
+
+    $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 1000,
+            values: [50, 300],
+            slide: function (event, ui) {
+
+                $("#slider-range-amount").text("₺" + ui.values[0] + " * ₺" + ui.values[1]);
+
+                $("#Urunler").empty(); //listeyi bosaltıyoruz
+
+
+                $.get("/Member/Slider/?sayi1=" + ui.values[0] + "&sayi2=" + ui.values[1] + "", function (gelenVeri) {
+
+                    $("#Urunler").html(gelenVeri);
+                })
+
+
+            }
+        });
 
 
 </script>
+
+
+
+
+@*<script>
+        $(function () {
+
+            $("#Filtre").keyup(function () {
+
+                $("#Urunler").empty(); //Urunleri Temızlıyoruz!!!
+
+                var filtre = $("#Filtre").val();
+
+                $.get("/Member/Filtre/?item=" + filtre + "", function (gelenVeri) {
+
+                    $("#Urunler").html(gelenVeri);
+                })
+
+            })
+
+
+
+        });
+
+
+    </script>
+
+    <script>
+          var Sliders = function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [50, 300],
+            slide: function (event, ui) {
+
+                $("#slider-range-amount").text("TL" + ui.values[0] + " * TL" + ui.values[1]);
+                //$("#furkan").text("Dolar" + ui.values[0]);
+
+
+                $("#Urunler").empty(); //listeyi bosaltıyoruz
+
+
+                $.get("/Member/Slider/?sayi1=" + ui.values[0] + "&sayi2=" + ui.values[1] + "", function (gelenVeri) {
+
+                    $("#Urunler").html(gelenVeri);
+                })
+
+
+            }
+        });
+    </script>*@

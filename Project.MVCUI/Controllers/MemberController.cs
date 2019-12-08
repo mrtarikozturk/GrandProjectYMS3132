@@ -61,6 +61,21 @@ namespace Project.MVCUI.Controllers
             }
 
         }
+        public PartialViewResult Slider(decimal sayi1, decimal sayi2, int sayfa = 1)
+        {
+            //ViewBag.sayi1 = sayi1;
+            //ViewBag.sayi2 = sayi2;
+
+            return PartialView(pRep.Slider(sayi1, sayi2).ToPagedList(sayfa, 10));
+        }
+
+
+        [HttpGet]
+        public PartialViewResult Filtre(string item)
+
+        {
+            return PartialView("_Filtre", pRep.Where(x => x.ProductName.StartsWith(item)));
+        }
         public ActionResult ProductDetail(int item)
         {
             if (pRep.Any(x => x.ID == item))
@@ -82,6 +97,16 @@ namespace Project.MVCUI.Controllers
                         ProductVM adamınurunu = digerfirma.Where(x => x.ProductName == bizimurun.ProductName).Single();
                         TempData["karsılastırma"] = "Eşleşen ürünler vardır";
                         ViewData.Add("adaminurunu", adamınurunu);
+
+                        if (bizimurun.UnitPrice < adamınurunu.UnitPrice)
+                        {
+                            ViewBag.info = $"{adamınurunu.UnitPrice - bizimurun.UnitPrice} ₺ Kardasınız";
+
+                        }
+                        else
+                        {
+                            ViewBag.info2 = $"{adamınurunu.UnitPrice - bizimurun.UnitPrice} ₺ Zarardasınız";
+                        }
 
                     }
 
