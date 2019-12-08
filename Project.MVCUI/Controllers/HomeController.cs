@@ -130,7 +130,9 @@ namespace Project.MVCUI.Controllers
                     if (arep.Any(x => x.UserName == item.UserName && cozulmusSifre == item.Password && x.IsActive == true && x.Role == UserRole.Member) == true)
                     {
 
-                        Session.Add("member", arep.Where(x => x.UserName == item.UserName && cozulmusSifre == item.Password && x.IsActive == true && x.Role == UserRole.Member));
+                        Session["member"] = arep.Where(x => x.UserName == item.UserName && cozulmusSifre == item.Password && x.IsActive == true && x.Role == UserRole.Member).FirstOrDefault();
+
+                        AppUser kullanici = Session["member"] as AppUser;
                         return RedirectToAction("ProductList", "Member");
                     }
 

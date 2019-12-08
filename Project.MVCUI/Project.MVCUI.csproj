@@ -2017,6 +2017,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Member\ProductList.cshtml" />
     <Content Include="Views\Member\SiparisiOnayla.cshtml" />
+    <Content Include="Views\Member\CartPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -70,9 +70,6 @@ namespace Project.MVCUI.Controllers
                 {
 
 
-
-                    //http://localhost:61379/api/Product/GetProducts
-                    //http://localhost:61379/
                     client.BaseAddress = new Uri("http://localhost:61379/api/");
                     //var postTask = client.PostAsJsonAsync("Product/GetProducts", item);
                     var getTask = client.GetAsync("Product/GetProducts");
@@ -114,7 +111,7 @@ namespace Project.MVCUI.Controllers
 
                 Session["scart"] = c;
                 ViewBag.SepeteAtma = "Urun Sepete Atıldı";
-                return RedirectToAction("CartPage"); // todo:şimdilik cartpage e yönlendirdim. eskiden product list idi. product liste sepete git tuşu koyalım.
+                return RedirectToAction("ProductList"); 
             }
 
             catch (Exception)
@@ -201,8 +198,7 @@ namespace Project.MVCUI.Controllers
 
                 if (result)
                 {
-                    //AppUser kullanici = Session["member"] as AppUser;
-                    item.AppUserID = (Session["member"] as AppUser).ID; //Order'in kim tarafından sipariş edildigini belirlersiniz
+                    item.AppUserID = (Session["member"] as AppUser).ID;
                     oRep.Add(item);
 
                     Cart sepet = Session["scart"] as Cart;
@@ -244,6 +240,11 @@ namespace Project.MVCUI.Controllers
                         var postTask = client.PostAsJsonAsync("Home/KargoOlustur", kargo);
 
                         HttpResponseMessage sonuc = postTask.Result;
+
+                        var geriyedonen = sonuc.Content.ReadAsAsync<string>();
+
+                        string kargoyazisi = geriyedonen.Result;
+                        TempData["Kargo"] = kargoyazisi;
 
                         if (sonuc.IsSuccessStatusCode)
                         {

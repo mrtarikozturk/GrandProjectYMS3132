@@ -20,7 +20,7 @@
 {
     <h3 style="color:red">@TempData["message"]  </h3>
 }
-else if (Session["member"] != null)
+else if (Session["member"] == null)
 {
     <h3 style="color:red">@TempData["UyeDegil"]  </h3>
 }
@@ -44,7 +44,7 @@ else
                                         <p> <h4 class="card-title" style="margin-top:20px">Ürün Adı : @item.Name</h4> </p>
 
                                         <p>   <h4 class="card-text">Ürün Fiyatı : @item.Price ₺</h4>  </p>
-                                        <input type="number" name=""/>
+
                                         <p>  <h4 class="card-text"> Ürün Adedi : @item.Amount </h4> </p>
 
                                         <p>  <h4 class="card-text"> Ürün toplam : @item.SubTotal </h4> </p>
@@ -66,13 +66,14 @@ else
 
                     <div class="alert alert-success alert-block fade in" sytle="margin-left:50px">
                         <p class="font-weight-bolder" style="margin-top:20px"> <h4> Toplam Ödenecek Miktar : @Model.TotalPrice ₺ </h4> </p>
-
-                        <div class="panel-body text-sm-center" style="margin-left:170px">
+                        <h4 style="text-align:right"> @Html.ActionLink("Alısverişe devam", "ProductList", null, new { @class = "btn btn-primary" }) </h4>
+                        <h4 style="text-align:right"> @Html.ActionLink("Siparişi Onayla", "SiparisiOnayla", null, new { @class = "btn btn-success" }) </h4>
+                        @*<div class="panel-body text-sm-center" style="margin-left:170px">
                             @Html.ActionLink("Alısverişe devam", "ProductList", null, new { @class = "btn btn-primary" })
                         </div>
                         <div class="panel-body text-sm-center" style="margin-left:180px">
                             @Html.ActionLink("Siparişi Onayla", "SiparisiOnayla", null, new { @class = "btn btn-success" })
-                        </div>
+                        </div>*@
                     </div>
 
                 </div>

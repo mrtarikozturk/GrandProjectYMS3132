@@ -40,11 +40,13 @@ namespace Project.DAL.StrategyPattern
             {
                 AppUser ap = new AppUser();
                 ap.UserName = new Internet("tr").UserName();
-                ap.Password = new Internet("tr").Password();
+                ap.Password = DantexCrypt.Crypt(new Internet("tr").Password());
                 ap.Email = new Internet("tr").Email();
 
                 context.AppUsers.Add(ap);
                 context.SaveChanges();
+
+          
             }
 
             for (int i = 1; i < 11; i++)
@@ -58,8 +60,9 @@ namespace Project.DAL.StrategyPattern
 
                 context.AppUserDetails.Add(apd);
                 context.SaveChanges();
-            }
 
+            }
+          
             #region VeriCekme1
 
             //Random rnd = new Random();
