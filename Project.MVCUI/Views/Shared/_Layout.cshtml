@@ -1,4 +1,20 @@
 ﻿<!DOCTYPE html>
+
+@{ 
+    string Ad;
+    string Soyad;
+    if (Session["member"] != null)
+    {
+        Ad = (Session["member"] as AppUser).Profile.FirstName;
+        Soyad= (Session["member"] as AppUser).Profile.LastName;
+    }
+    else
+    {
+        Ad = "Misafir";
+        Soyad = "";
+    }
+
+}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -80,7 +96,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar1_small.jpg">
-                            <span class="username">Jhon Doue</span>
+                            <span class="username">@Ad  @Soyad</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">

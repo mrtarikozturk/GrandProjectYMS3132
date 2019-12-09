@@ -65,8 +65,24 @@ namespace Project.MVCUI.Controllers
         {
             //ViewBag.sayi1 = sayi1;
             //ViewBag.sayi2 = sayi2;
+            try
+            {
+                if (pRep.Slider(sayi1, sayi2) != null)
+                {
+                    return PartialView(pRep.Slider(sayi1, sayi2).ToPagedList(sayfa, 10));
+                }
+                else
+                {
+                    return PartialView();
+                }
+            }
+            catch (Exception)
+            {
 
-            return PartialView(pRep.Slider(sayi1, sayi2).ToPagedList(sayfa, 10));
+                return PartialView();
+            }
+            
+            
         }
 
 
@@ -74,7 +90,7 @@ namespace Project.MVCUI.Controllers
         public PartialViewResult Filtre(string item)
 
         {
-            return PartialView("_Filtre", pRep.Where(x => x.ProductName.StartsWith(item)));
+            return PartialView("Filtre", pRep.Where(x => x.ProductName.StartsWith(item)));
         }
         public ActionResult ProductDetail(int item)
         {
@@ -94,19 +110,16 @@ namespace Project.MVCUI.Controllers
 
                     if (digerfirma.Any(x => x.ProductName == bizimurun.ProductName))
                     {
-                        ProductVM adamınurunu = digerfirma.Where(x => x.ProductName == bizimurun.ProductName).Single();
+                        ProductVM adamınurunu = digerfirma.Where(x => x.ProductName == bizimurun.ProductName).FirstOrDefault();
                         TempData["karsılastırma"] = "Eşleşen ürünler vardır";
                         ViewData.Add("adaminurunu", adamınurunu);
 
                         if (bizimurun.UnitPrice < adamınurunu.UnitPrice)
                         {
                             ViewBag.info = $"{adamınurunu.UnitPrice - bizimurun.UnitPrice} ₺ Kardasınız";
-
-                        }
-                        else
-                        {
                             ViewBag.info2 = $"{adamınurunu.UnitPrice - bizimurun.UnitPrice} ₺ Zarardasınız";
                         }
+                        
 
                     }
 

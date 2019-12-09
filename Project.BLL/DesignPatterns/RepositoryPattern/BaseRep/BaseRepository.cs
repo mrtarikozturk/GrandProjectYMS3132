@@ -90,7 +90,16 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.BaseRep
 
         public virtual List<T> Where(Expression<Func<T, bool>> exp)
         {
-            return db.Set<T>().Where(exp).ToList();
+            try
+            {
+                return db.Set<T>().Where(exp).ToList();
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            
         }
 
         public bool Any(Expression<Func<T, bool>> exp)
