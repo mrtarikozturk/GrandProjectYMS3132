@@ -1,11 +1,12 @@
-﻿@model List<Product>
+﻿@model List<AppUser>
 @{
-    ViewBag.Title = "ProductList";
+    ViewBag.Title = "Kullanıcı Listeleme Sayfası";
 }
+
 
 <section class="panel">
     <header class="panel-heading">
-        Ürün Listesi
+        Üye Listesi
     </header>
     <div class="panel-body">
         <div class="adv-table">
@@ -13,9 +14,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Ürün Adı</th>
-                        <th>Fiyatı</th>
-                        <th>Stok Miktarı</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>E-Posta</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Aktif Mi?</th>
+                        <th>Rolü</th>
                         <th class="hidden-phone">Veri Durumu</th>
                         <th class="hidden-phone">Güncelleme</th>
                         <th class="hidden-phone">Silme</th>
@@ -23,20 +27,27 @@
                 </thead>
                 <tbody>
 
-                    @foreach (Product item in Model)
+                    @foreach (AppUser item in Model)
                     {
                         <tr class="gradeX">
                             <td>@item.ID</td>
-                            <td>@item.ProductName</td>
-                            <td>
-                                @item.UnitPrice
-                            </td>
-                            <td>
-                                @item.UnitsInStock
-                            </td>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            @if (item.Profile != null)
+                            {
+                                <td>@item.Profile.FirstName</td>
+                                <td>@item.Profile.LastName</td>
+                            }
+                            else
+                            {
+                                <td>Yok</td>
+                                <td>Yok</td>
+                            }
+                            <td>@item.IsActive</td>
+                            <td>@item.Role</td>
                             <td class="hidden-phone">@item.Status</td>
-                            <td class="center hidden-phone">  @Html.ActionLink("Güncelle", "Update", new { id = item.ID }, new { @class = "btn btn-warning" })     </td>
-                            <td class="center hidden-phone">  @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })        </td>
+                            <td class="center hidden-phone">  @Html.ActionLink("Güncelle", "Update", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+                            <td class="center hidden-phone">  @Ajax.ActionLink("Sil", "Delete", "AppUser", new { area = "administrator", id = item.ID }, new AjaxOptions() { HttpMethod = "GET" }, new { @class = "btn  btn-danger" })</td>
                         </tr>
                     }
 
@@ -100,4 +111,8 @@
         });
     });</script>
 
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
 
+@*@Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" }*@

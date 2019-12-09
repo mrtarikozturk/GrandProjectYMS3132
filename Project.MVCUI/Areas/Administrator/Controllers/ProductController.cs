@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Administrator.Controllers
 {
-    [ActFilter, ResFilter, AdminAuthentication]
+    //[ActFilter, ResFilter, AdminAuthentication]
     public class ProductController : Controller
     {
         ProductRepository prep;
@@ -38,7 +38,7 @@ namespace Project.MVCUI.Areas.Administrator.Controllers
 
         public ActionResult ListProduct()
         {
-            return View(Tuple.Create(prep.GetActives(), pcrep.GetActives()));
+            return View(prep.GetActives());
         }
 
         public ActionResult AddProduct()

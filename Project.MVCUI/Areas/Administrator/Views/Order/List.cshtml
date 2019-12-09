@@ -1,11 +1,12 @@
-﻿@model List<Product>
+﻿@model Tuple<List<Order>, List<OrderDetail>>
 @{
-    ViewBag.Title = "ProductList";
+    ViewBag.Title = "Sipariş Listesi";
 }
+
 
 <section class="panel">
     <header class="panel-heading">
-        Ürün Listesi
+        Sipariş Listesi
     </header>
     <div class="panel-body">
         <div class="adv-table">
@@ -13,9 +14,13 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Ürün Adı</th>
-                        <th>Fiyatı</th>
-                        <th>Stok Miktarı</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Sipariş Tutarı</th>
+                        <th>Toplam Ürün Sayısı</th>
+                        <th>Ödeme Tarihi</th>
+                        <th>Ödeme Tipi</th>
+                        <th>Sipariş Durumu</th>
+                        <th>Paketlenme Durumu</th>
                         <th class="hidden-phone">Veri Durumu</th>
                         <th class="hidden-phone">Güncelleme</th>
                         <th class="hidden-phone">Silme</th>
@@ -23,17 +28,17 @@
                 </thead>
                 <tbody>
 
-                    @foreach (Product item in Model)
+                    @foreach (OrderDetail item in Model.Item2)
                     {
                         <tr class="gradeX">
-                            <td>@item.ID</td>
-                            <td>@item.ProductName</td>
-                            <td>
-                                @item.UnitPrice
-                            </td>
-                            <td>
-                                @item.UnitsInStock
-                            </td>
+                            <td>@item.OrderID</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.TotalPrice</td>
+                            <td>@item.Amount</td>
+                            <td>@item.PaymentDate</td>
+                            <td>@item.PaymentOption</td>
+                            <td>@item.OrderStatus</td>
+                            <td>@item.PackingStatus</td>
                             <td class="hidden-phone">@item.Status</td>
                             <td class="center hidden-phone">  @Html.ActionLink("Güncelle", "Update", new { id = item.ID }, new { @class = "btn btn-warning" })     </td>
                             <td class="center hidden-phone">  @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })        </td>
@@ -99,5 +104,4 @@
             }
         });
     });</script>
-
 

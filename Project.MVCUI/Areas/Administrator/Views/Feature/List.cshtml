@@ -1,11 +1,12 @@
-﻿@model List<Product>
+﻿@model List<Feature>
 @{
-    ViewBag.Title = "ProductList";
+    ViewBag.Title = "Özellik Sayfası";
 }
+
 
 <section class="panel">
     <header class="panel-heading">
-        Ürün Listesi
+        Özellik Listesi
     </header>
     <div class="panel-body">
         <div class="adv-table">
@@ -13,9 +14,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Ürün Adı</th>
-                        <th>Fiyatı</th>
-                        <th>Stok Miktarı</th>
+                        <th>Özellik Adı</th>
+                        <th>Özellik Açıklaması</th>
                         <th class="hidden-phone">Veri Durumu</th>
                         <th class="hidden-phone">Güncelleme</th>
                         <th class="hidden-phone">Silme</th>
@@ -23,17 +23,12 @@
                 </thead>
                 <tbody>
 
-                    @foreach (Product item in Model)
+                    @foreach (Feature item in Model)
                     {
                         <tr class="gradeX">
                             <td>@item.ID</td>
-                            <td>@item.ProductName</td>
-                            <td>
-                                @item.UnitPrice
-                            </td>
-                            <td>
-                                @item.UnitsInStock
-                            </td>
+                            <td>@item.FeatureName</td>
+                            <td>@item.Description</td>
                             <td class="hidden-phone">@item.Status</td>
                             <td class="center hidden-phone">  @Html.ActionLink("Güncelle", "Update", new { id = item.ID }, new { @class = "btn btn-warning" })     </td>
                             <td class="center hidden-phone">  @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })        </td>

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Project.MVCUI.Areas.Administrator.Controllers
 {
-    [ActFilter, ResFilter, AdminAuthentication]
+    //[ActFilter, ResFilter, AdminAuthentication]
     public class FeatureController : Controller
     {
         FeatureRepository frep;

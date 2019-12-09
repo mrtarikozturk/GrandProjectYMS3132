@@ -1799,11 +1799,22 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Administrator\Views\AppUser\List.cshtml" />
+    <Content Include="Areas\Administrator\Views\Category\ListCategory.cshtml" />
+    <Content Include="Areas\Administrator\Views\Feature\List.cshtml" />
+    <Content Include="Areas\Administrator\Views\Order\List.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -2021,6 +2032,7 @@
     <Content Include="Views\Member\ProductDetail.cshtml" />
     <Content Include="Views\Member\Slider.cshtml" />
     <Content Include="Views\Member\Filtre.cshtml" />
+    <Content Include="Views\Member\CartPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2032,10 +2044,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Models\" />
     <Folder Include="Areas\Administrator\Views\AdminCategory\" />
-    <Folder Include="Areas\Administrator\Views\AppUser\" />
-    <Folder Include="Areas\Administrator\Views\Feature\" />
     <Folder Include="Areas\Administrator\Views\Home\" />
-    <Folder Include="Areas\Administrator\Views\Order\" />
     <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,12 @@
-﻿@model List<Product>
+﻿
+@model List<Category>
 @{
-    ViewBag.Title = "ProductList";
+    ViewBag.Title = "Kategori Sayfası";
 }
 
 <section class="panel">
     <header class="panel-heading">
-        Ürün Listesi
+        Kategori Listesi
     </header>
     <div class="panel-body">
         <div class="adv-table">
@@ -13,9 +14,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Ürün Adı</th>
-                        <th>Fiyatı</th>
-                        <th>Stok Miktarı</th>
+                        <th>Kategori Adı</th>
+                        <th>Kategori Açıklaması</th>
                         <th class="hidden-phone">Veri Durumu</th>
                         <th class="hidden-phone">Güncelleme</th>
                         <th class="hidden-phone">Silme</th>
@@ -23,24 +23,17 @@
                 </thead>
                 <tbody>
 
-                    @foreach (Product item in Model)
+                    @foreach (Category item in Model)
                     {
                         <tr class="gradeX">
                             <td>@item.ID</td>
-                            <td>@item.ProductName</td>
-                            <td>
-                                @item.UnitPrice
-                            </td>
-                            <td>
-                                @item.UnitsInStock
-                            </td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.Description</td>
                             <td class="hidden-phone">@item.Status</td>
-                            <td class="center hidden-phone">  @Html.ActionLink("Güncelle", "Update", new { id = item.ID }, new { @class = "btn btn-warning" })     </td>
-                            <td class="center hidden-phone">  @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })        </td>
+                            <td class="center hidden-phone">  @Html.ActionLink("Güncelle", "UpdateCategory", new { id = item.ID }, new { @class = "btn btn-warning" })     </td>
+                            <td class="center hidden-phone">  @Html.ActionLink("Sil", "DeleteCategory", new { id = item.ID }, new { @class = "btn btn-danger" })        </td>
                         </tr>
                     }
-
-
                 </tbody>
             </table>
         </div>
@@ -99,5 +92,3 @@
             }
         });
     });</script>
-
-
