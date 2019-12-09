@@ -254,6 +254,7 @@ namespace Project.MVCUI.Controllers
                     }
 
                     TempData["odeme"] = "Siparişiniz bize ulasmıstır..Tesekkür ederiz";
+            
 
                     using (HttpClient client = new HttpClient())
                     {
@@ -302,6 +303,7 @@ namespace Project.MVCUI.Controllers
                 else
                 {
                     TempData["odeme"] = "Odeme ile ilgili bir sıkıntı olustu. Lütfen banka ile iletişime geciniz";
+                  
                     return RedirectToAction("ProductList");
                 }
 
@@ -321,6 +323,7 @@ namespace Project.MVCUI.Controllers
 
         }
 
+     
         [HttpGet]
         public ActionResult Fatura()
         {
@@ -333,7 +336,7 @@ namespace Project.MVCUI.Controllers
                     ViewBag.kullaniciad = (Session["member"] as AppUser).Profile.FirstName;
                     ViewBag.soyad = (Session["member"] as AppUser).Profile.LastName;
                     ViewBag.kullaniciAdres = (Session["member"] as AppUser).Profile.Address;
-                    
+                    //ViewBag.kullaniciSehir= (Session["member"] as Order).City;
 
                     return View(c);
                 }
@@ -384,5 +387,7 @@ namespace Project.MVCUI.Controllers
             }
 
         }
+
+
     }
 }

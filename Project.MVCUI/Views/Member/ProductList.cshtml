@@ -37,18 +37,14 @@
                 <div class="col-md-3">
                     <section class="panel">
                         <header class="panel-heading">
-                            Price Range
+                            Fiyat Aralığı
                         </header>
                         <div class="panel-body sliders">
                             <div id="slider-range" class="slider"></div>
                             <div class="slider-info">
                                 <span id="slider-range-amount"></span>
-
                             </div>
-                            <br />
-                            <div class="panel-body">
-                                <input id="Filtre" type="text" placeholder="Ürün Arat" class="form-control">
-                            </div>
+                          
                         </div>
                     </section>
                 </div>
@@ -57,17 +53,13 @@
 
 
                 <div class="pull-right">
+                 <br/>
                     <ul class="pagination pagination-sm pro-page-list">
 
                         @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("ProductList", new { item = ViewBag.kategori, sayfa }))
                     </ul>
-                    <br />
-                    @Html.ActionLink("Sepet Sayfası", "CartPage", "Member", new { @class = "btn btn-info" })
-                </div>
-                @*<div class="pull-right">
-                        @Html.ActionLink("Sepet Sayfası", "CartPage", "Member", new { @class = "btn btn-info" })
 
-                    </div>*@
+                </div>
             </div>
         </section>
 
@@ -187,7 +179,7 @@
             }
         });
 
-
+     $("#slider-range-amount").text( $("#slider-range").slider("values", 0) + " ₺ - " + $("#slider-range").slider("values", 1)+ " ₺" );
 </script>
 
 

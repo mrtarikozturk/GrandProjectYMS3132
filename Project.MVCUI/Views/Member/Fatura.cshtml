@@ -43,7 +43,7 @@
             <div style="text-align:center" class="row invoice-list">
 
                 <div class="col-lg-4 col-sm-4">
-                    <h4>BILLING ADDRESS</h4>
+                    <h4>FATURA ADRESİ</h4>
                     <p>
                         @ViewBag.kullaniciad @ViewBag.soyad <br>
                         @ViewBag.kullaniciAdres <br>
@@ -51,21 +51,19 @@
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <h4>SHIPPING ADDRESS</h4>
+                    <h4>KARGO ADRESİ</h4>
                     <p>
-                        Vector Lab<br>
-                        Road 1, House 2, Sector 3<br>
-                        ABC, Dreamland 1230<br>
+                        @ViewBag.kullaniciAdres 
                         P: +38 (123) 456-7890<br>
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <h4>INVOICE INFO</h4>
+                    <h4>FATURA BİLGİLERİ</h4>
                     <ul class="unstyled">
-                        <li>Invoice Number		: <strong>69626</strong></li>
-                        <li>Invoice Date		: 2013-03-17</li>
-                        <li>Due Date			: 2013-03-20</li>
-                        <li>Invoice Status		: Paid</li>
+                        <li>FATURA NUMARASI		: <strong>69626</strong></li>
+                        <li>FATURA TARİHİ    	: 2013-03-17</li>
+                        <li>TESLİM TARİHİ    	: 2013-03-20</li>
+                        <li>FATURA DURUMU		: Paid</li>
                     </ul>
                 </div>
             </div>
@@ -110,8 +108,8 @@
                 </div>
             </div>
             <div class="text-center invoice-btn">
-                <a class="btn btn-danger btn-lg"><i class="icon-check"></i> Submit Invoice </a>
-                <a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="icon-print"></i> Print </a>
+                <a class="btn btn-success btn-lg"><i class="icon-check"></i> FATURAYI ONAYLA </a>
+                <a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="icon-print"></i> YAZDIR </a>
             </div>
         </div>
     </div>
